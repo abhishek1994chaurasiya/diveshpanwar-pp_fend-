@@ -15,5 +15,15 @@ button.mat-menu-item {
 }
 
 .bigger-fonts {
-  font-size: 1.4rem;
+  font-size: 1rem;
+}
+
+
+.inp-control {
+  font-size: 15px;
+}
+
+.search-inp-control {
+  width: 70%;
+  font-size: 15px;
 }

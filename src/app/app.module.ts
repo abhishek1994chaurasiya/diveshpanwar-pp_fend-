@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FlexLayoutModule} from '@angular/flex-layout';
-import { NavigationComponent } from './navigation/navigation.component';
+import { NavigationComponent, SearchResultDialogComponent } from './navigation/navigation.component';
 import { MatModule } from './shared/mat/mat.module';
 import { CustomRoutingModule } from './shared/custom-routing/custom-routing.module';
 import { RouterModule } from '@angular/router';
@@ -25,6 +25,7 @@ import { CartComponent } from './cart/cart.component';
     ErrorComponent,
     SignupComponent,
     MessageSentDialogComponent,
+    SearchResultDialogComponent,
     LoginComponent,
     CartComponent,
   ],
@@ -43,6 +44,7 @@ import { CartComponent } from './cart/cart.component';
   ],
   entryComponents: [
     MessageSentDialogComponent,
+    SearchResultDialogComponent
   ],
   bootstrap: [AppComponent]
 })

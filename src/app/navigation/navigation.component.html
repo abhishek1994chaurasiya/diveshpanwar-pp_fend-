@@ -7,13 +7,13 @@
   <!-- This fills the remaining space of the current row -->
   <span class="fill-remaining-space"></span>
   <div fxLayout="row" fxShow="false" fxShow.gt-sm class="special-font">
-      <button mat-button routerLink="/login" class="bigger-fonts special-font" *ngIf="!userLoggedIn">Login</button>
-      <button mat-button routerLink="/signup" class="bigger-fonts special-font" *ngIf="!userLoggedIn">Signup</button>
-      <button mat-button routerLink="/dashboard" class="bigger-fonts special-font" *ngIf="userLoggedIn">Dashboard</button>
-      <button mat-button (click)="logout()" class="bigger-fonts special-font" *ngIf="userLoggedIn">Logout</button>
+    <button mat-button routerLink="/login" class="bigger-fonts special-font" *ngIf="!userLoggedIn">Login</button>
+    <button mat-button routerLink="/signup" class="bigger-fonts special-font" *ngIf="!userLoggedIn">Signup</button>
+    <button mat-button routerLink="/dashboard" class="bigger-fonts special-font" *ngIf="userLoggedIn">Dashboard</button>
+    <button mat-button (click)="logout()" class="bigger-fonts special-font" *ngIf="userLoggedIn">Logout</button>
   </div>
   <button mat-button [mat-menu-trigger-for]="menu" fxHide="false" fxHide.gt-sm>
-   <mat-icon>menu</mat-icon>
+    <mat-icon>menu</mat-icon>
   </button>
 
 </mat-toolbar>
@@ -24,3 +24,13 @@
   <button mat-menu-item (click)="logout()" *ngIf="userLoggedIn">Logout</button>
   <!--<button mat-menu-item>Help</button>-->
 </mat-menu>
+<mat-toolbar color="primary">
+  <div class="col-6 text-center ml-auto mr-auto">
+      <form [formGroup]="searchForm">
+          <mat-form-field class="search-inp-control text-center special-font">
+            <mat-icon matSuffix class="pointer" (click)="search()">search</mat-icon>
+            <input matInput placeholder="Search Product" [type]='"text"' autocomplete="off" formControlName="searchCriteria">
+          </mat-form-field>
+        </form>
+  </div>
+</mat-toolbar>
