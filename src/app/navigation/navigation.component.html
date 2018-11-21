@@ -1,0 +1,22 @@
+<mat-toolbar color="primary">
+  <button mat-button routerLink="/">
+    <i class="fab fa-app-store custom-title-icon"></i> &nbsp;
+    <span class='font-weight-bold special-font bigger-fonts'>{{title}}</span>
+  </button>
+
+  <!-- This fills the remaining space of the current row -->
+  <span class="fill-remaining-space"></span>
+  <div fxLayout="row" fxShow="false" fxShow.gt-sm class="special-font">
+      <button mat-button routerLink="/login" class="bigger-fonts special-font">Login</button>
+      <button mat-button routerLink="/signup" class="bigger-fonts special-font">Signup</button>
+  </div>
+  <button mat-button [mat-menu-trigger-for]="menu" fxHide="false" fxHide.gt-sm>
+   <mat-icon>menu</mat-icon>
+  </button>
+
+</mat-toolbar>
+<mat-menu x-position="before" #menu="matMenu">
+  <button mat-menu-item routerLink="/login">Login</button>
+  <button mat-menu-item routerLink="/signup">Signup</button>
+  <!--<button mat-menu-item>Help</button>-->
+</mat-menu>

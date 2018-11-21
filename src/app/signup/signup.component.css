@@ -1,0 +1,7 @@
+.inp-control {
+  width: 90%;
+}
+
+.mat-flat-button:not([class*=mat-elevation-z]) {
+  font-family: 'Kaushan Script', cursive;
+}

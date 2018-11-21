@@ -1,0 +1,13 @@
+<div *ngIf="data.response">
+    <div class="text-center">
+        <i class="material-icons text-success">mail</i>
+    </div>
+    <h5 class="text-center special-font">User Account Created Successfully</h5>
+    <h5 class="text-center special-font text-info">redirecting to login page in 3 seconds</h5>
+</div>
+<div *ngIf="!data.response">
+    <div class="text-center">
+        <i class="material-icons text-danger">mail</i>
+    </div>
+    <h5 class="text-center special-font">{{data.message}}</h5>
+</div>

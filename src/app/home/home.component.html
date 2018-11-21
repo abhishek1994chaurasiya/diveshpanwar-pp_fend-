@@ -1,0 +1,22 @@
+<div class="container-fluid">
+  <div class="heading mt-3 mb-3">
+    <h4 class="special-font text-center">What's This?</h4>
+    <hr class="special-hr">
+    <p class="special-font p-font text-center mb-3">
+      Well to begin with, its just a simple website which will try provide the best on-demand tutorials. The tutorials might not be the best one but, we are determined to make them better each day. We would also love to hear suggestions from you. Happy learning...
+    </p>
+  </div>
+
+  <h4 class="special-font text-center mt-6">Currently we are working on...</h4>
+  <hr class="special-hr">
+  <div class="row mt-3">
+    <div class="col col-6 col-md col-md-3 mt-2" *ngFor="let lang of languageDescs">
+      <div class="card box-shadows">
+        <img class="card-img-top image-styling mt-1 img-fluid mx-auto d-block" src="{{lang.imgUrl}}" alt="{{lang.name}}">
+        <div class="card-body">
+          <h5 class="card-title text-center font-weight-bold special-font">{{lang.name}}</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
