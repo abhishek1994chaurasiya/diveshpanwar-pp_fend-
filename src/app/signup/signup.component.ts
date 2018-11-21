@@ -33,7 +33,7 @@ export class SignupComponent implements OnInit {
       {
         username: [
           '',
-          [Validators.required, Validators.pattern('^[A-Za-z]{1,}$')]
+          [Validators.required, Validators.pattern('^[A-Za-z][A-Za-z, ]{1,}[A-Za-z]$')]
         ],
         email: ['', [Validators.required, Validators.email]],
         contact: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],

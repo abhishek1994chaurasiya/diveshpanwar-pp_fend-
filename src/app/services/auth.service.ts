@@ -8,7 +8,11 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  signup(signUpdata) {
+  signup(signUpdata): any {
       return this.http.post('http://localhost:3000/signup', signUpdata);
+  }
+
+  login(loginData): any {
+    return this.http.post('http://localhost:3000/login', loginData);
   }
 }

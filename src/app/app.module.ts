@@ -12,10 +12,10 @@ import { HomeComponent } from './home/home.component';
 import { ErrorComponent } from './error/error.component';
 import { SignupComponent, MessageSentDialogComponent } from './signup/signup.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MailsService } from './services/mails.service';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthService } from './services/auth.service';
 import { LoginComponent } from './login/login.component';
+import { CartComponent } from './cart/cart.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +26,7 @@ import { LoginComponent } from './login/login.component';
     SignupComponent,
     MessageSentDialogComponent,
     LoginComponent,
+    CartComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,7 +39,6 @@ import { LoginComponent } from './login/login.component';
     HttpClientModule
   ],
   providers: [
-    MailsService,
     AuthService
   ],
   entryComponents: [
