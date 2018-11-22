@@ -1,22 +1,25 @@
 <div class="container-fluid">
   <div class="heading mt-3 mb-3">
-    <h4 class="special-font text-center">What's This?</h4>
+    <h4 class="special-font text-center">E-Kart</h4>
     <hr class="special-hr">
     <p class="special-font p-font text-center mb-3">
-      Well to begin with, its just a simple website which will try provide the best on-demand tutorials. The tutorials might not be the best one but, we are determined to make them better each day. We would also love to hear suggestions from you. Happy learning...
+      Now get exiting offers on all purchases.
     </p>
   </div>
 
-  <h4 class="special-font text-center mt-6">Currently we are working on...</h4>
+  <h4 class="special-font text-center mt-6">Products</h4>
   <hr class="special-hr">
-  <div class="row mt-3">
-    <div class="col col-6 col-md col-md-3 mt-2" *ngFor="let lang of languageDescs">
+  <div class="row mt-3" *ngIf="products && products.length > 0">
+    <div class="col col-6 col-md col-md-3 mt-2 pointer" *ngFor="let product of products" (click)="showProduct(product._id)">
       <div class="card box-shadows">
-        <img class="card-img-top image-styling mt-1 img-fluid mx-auto d-block" src="{{lang.imgUrl}}" alt="{{lang.name}}">
+        <img class="card-img-top image-styling mt-1 img-fluid mx-auto d-block" src="{{product.imgUrl}}" alt="{{product.displayName}}">
         <div class="card-body">
-          <h5 class="card-title text-center font-weight-bold special-font">{{lang.name}}</h5>
+          <h5 class="card-title text-center font-weight-bold special-font">{{product.displayName}}</h5>
         </div>
       </div>
     </div>
+  </div>
+  <div class="row mt-3" *ngIf="products && products.length == 0">
+    <h5 class="text-center text-info special-font">No Products Available Yet</h5>
   </div>
 </div>

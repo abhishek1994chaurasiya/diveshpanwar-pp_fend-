@@ -1,0 +1,72 @@
+<div>
+  <div class="col-6 ml-auto mr-auto mt-1 mb-3" *ngIf="product">
+    <div class="card box-shadows">
+      <img class="card-img-top image-styling img-fluid mx-auto d-block img-thumbnail pl-2 pr-2" src="{{product.imgUrl}}"
+        alt="{{product.displayName}}">
+      <div class="card-body">
+        <h5 class="card-title text-center font-weight-bold special-font">{{product.displayName}}</h5>
+        <p class="text-center special-font">
+          {{product.desc}}
+        </p>
+        <div class="row">
+          <div class="col text-right">
+            <h6 class="font-italic"><strong>Price:</strong></h6>
+          </div>
+          <div class="col text-left">
+            <h6 class="font-italic"><del class="text-danger">{{product.price}}</del></h6>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col text-right">
+            <h6 class="font-italic"><strong>Offer Price:</strong></h6>
+          </div>
+          <div class="col text-left">
+            <h6 class="font-italic">{{product.offerPrice}}</h6>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col text-right">
+            <h6 class="font-italic"><strong>Discount:</strong></h6>
+          </div>
+          <div class="col text-left">
+            <h6 class="font-italic">{{product.discount}}%</h6>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col text-right">
+            <h6 class="font-italic text-info"><strong>Ratings:</strong></h6>
+          </div>
+          <div class="col text-left">
+            <h6 class="font-italic text-info">{{product.avgRating}}</h6>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col text-right">
+            <h6 class="font-italic text-info"><strong>Reviews:</strong></h6>
+          </div>
+          <div class="col text-left">
+            <h6 class="font-italic text-info">{{product.reviews}}</h6>
+          </div>
+        </div>
+        <form [formGroup]="cartForm" (ngSubmit)="addToCart()">
+          <div class="form-group form-row">
+            <div class="col text-right mt-1 font-weight-bold font-italic">
+              Quantity:
+            </div>
+            <div class="col text-left">
+              <select name="productQuantity" id="productQuantity" formControlName="productQuantity" class="form-control col-7 col-md-3"
+                style="height: 2rem; font-size: 0.8rem;" *ngIf="maxQty">
+                <option *ngFor="let counter of maxQty" value={{counter}} >{{counter}}</option>
+              </select>
+
+            </div>
+          </div>
+          <div class="form-group text-center ">
+            <input type="submit" value="Add To Cart" class="btn btn-outline-warning text-dark special-font font-weight-bold">
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>

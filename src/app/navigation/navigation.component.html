@@ -11,6 +11,12 @@
     <button mat-button routerLink="/signup" class="bigger-fonts special-font" *ngIf="!userLoggedIn">Signup</button>
     <button mat-button routerLink="/dashboard" class="bigger-fonts special-font" *ngIf="userLoggedIn">Dashboard</button>
     <button mat-button (click)="logout()" class="bigger-fonts special-font" *ngIf="userLoggedIn">Logout</button>
+    <button mat-button class="bigger-fonts special-font">
+      <i class="material-icons">
+        shopping_cart
+      </i>
+      <span class="badge badge-pill badge-dark">{{cartCount}}</span>
+    </button>
   </div>
   <button mat-button [mat-menu-trigger-for]="menu" fxHide="false" fxHide.gt-sm>
     <mat-icon>menu</mat-icon>
@@ -22,15 +28,22 @@
   <button mat-menu-item routerLink="/signup" *ngIf="!userLoggedIn">Signup</button>
   <button mat-menu-item routerLink="/dashboard" *ngIf="userLoggedIn">Dashboard</button>
   <button mat-menu-item (click)="logout()" *ngIf="userLoggedIn">Logout</button>
+  <button mat-menu-item>
+    <i class="material-icons">
+      shopping_cart
+    </i>
+    <span class="badge badge-pill badge-dark">{{cartCount}}</span>
+  </button>
+
   <!--<button mat-menu-item>Help</button>-->
 </mat-menu>
 <mat-toolbar color="primary">
   <div class="col-6 text-center ml-auto mr-auto">
-      <form [formGroup]="searchForm">
-          <mat-form-field class="search-inp-control text-center special-font">
-            <mat-icon matSuffix class="pointer" (click)="search()">search</mat-icon>
-            <input matInput placeholder="Search Product" [type]='"text"' autocomplete="off" formControlName="searchCriteria">
-          </mat-form-field>
-        </form>
+    <form [formGroup]="searchForm">
+      <mat-form-field class="search-inp-control text-center special-font">
+        <mat-icon matSuffix class="pointer" (click)="search()">search</mat-icon>
+        <input matInput placeholder="Search Product" [type]='"text"' autocomplete="off" formControlName="searchCriteria">
+      </mat-form-field>
+    </form>
   </div>
 </mat-toolbar>

@@ -16,6 +16,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { AuthService } from './services/auth.service';
 import { LoginComponent } from './login/login.component';
 import { CartComponent } from './cart/cart.component';
+import { ProductService } from './services/product.service';
+import { HttpModule } from '@angular/http';
+import { SingleProductComponent } from './single-product/single-product.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +31,7 @@ import { CartComponent } from './cart/cart.component';
     SearchResultDialogComponent,
     LoginComponent,
     CartComponent,
+    SingleProductComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,10 +41,12 @@ import { CartComponent } from './cart/cart.component';
     CustomRoutingModule,
     RouterModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    HttpModule
   ],
   providers: [
-    AuthService
+    AuthService,
+    ProductService
   ],
   entryComponents: [
     MessageSentDialogComponent,

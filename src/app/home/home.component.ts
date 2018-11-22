@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { ProductService } from '../services/product.service';
+import { Router } from '@angular/router';
 
 interface LangDesc {
   name: string;
@@ -11,37 +13,27 @@ interface LangDesc {
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-
-  languageDescs: LangDesc[] = [
-    {
-      name : 'JS',
-      imgUrl : '../../assets/languages/js.png'
-    },
-    {
-      name : 'PHP',
-      imgUrl : '../../assets/languages/php.png'
-    },
-    {
-      name : 'LARAVEL',
-      imgUrl : '../../assets/languages/laravel.png'
-    },
-    {
-      name : 'NODE JS',
-      imgUrl : '../../assets/languages/nodejs.png'
-    },
-    {
-      name : 'Angular',
-      imgUrl : '../../assets/languages/angular.png'
-    },
-    {
-      name : 'CSS',
-      imgUrl : '../../assets/languages/css.jpg'
-    },
-  ];
-
-  constructor() { }
+  products: any;
+  error: any;
+  constructor(private productService: ProductService, private router: Router, private cdref: ChangeDetectorRef) {}
 
   ngOnInit() {
+    this.error = null;
+    this.productService.allProducts().subscribe(
+      res => {
+        console.log(res.json());
+        this.products = res.json();
+        this.cdref.detectChanges();
+      },
+      err => {
+        console.log(err.json());
+        this.error = err.json();
+        this.cdref.detectChanges();
+      }
+    );
   }
 
+  showProduct(productId) {
+    this.router.navigate(['/product', productId]);
+  }
 }
