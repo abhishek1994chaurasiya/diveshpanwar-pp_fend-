@@ -11,6 +11,10 @@ export class ProductService {
     return this.http.get('http://localhost:3000/products');
   }
 
+  allDeals() {
+    return this.http.get('http://localhost:3000/deals');
+  }
+
   singleProduct(productId) {
     return this.http.post('http://localhost:3000/singleProduct', {productId: productId});
   }

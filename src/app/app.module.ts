@@ -20,6 +20,7 @@ import { ProductService } from './services/product.service';
 import { HttpModule } from '@angular/http';
 import { SingleProductComponent } from './single-product/single-product.component';
 import { AlertComponent } from './alert/alert.component';
+import { AuthGuard } from './guards/auth.guard';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { AlertComponent } from './alert/alert.component';
   ],
   providers: [
     AuthService,
-    ProductService
+    ProductService,
+    AuthGuard
   ],
   entryComponents: [
     MessageSentDialogComponent,

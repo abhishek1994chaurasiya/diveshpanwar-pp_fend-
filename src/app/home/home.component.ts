@@ -14,6 +14,7 @@ interface LangDesc {
 })
 export class HomeComponent implements OnInit {
   products: any;
+  deals: any;
   error: any;
   constructor(private productService: ProductService, private router: Router, private cdref: ChangeDetectorRef) {}
 
@@ -26,8 +27,20 @@ export class HomeComponent implements OnInit {
         this.cdref.detectChanges();
       },
       err => {
-        console.log(err.json());
-        this.error = err.json();
+        // console.log(err.json());
+        this.error = 'Something Wrong Happened. Please try again.';
+        this.cdref.detectChanges();
+      }
+    );
+    this.productService.allDeals().subscribe(
+      res => {
+        console.log(res.json());
+        this.deals = res.json();
+        this.cdref.detectChanges();
+      },
+      err => {
+        // console.log(err.json());
+        this.error = 'Something Wrong Happened. Please try again.';
         this.cdref.detectChanges();
       }
     );
