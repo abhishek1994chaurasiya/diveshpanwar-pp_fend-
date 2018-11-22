@@ -19,6 +19,7 @@ import { CartComponent } from './cart/cart.component';
 import { ProductService } from './services/product.service';
 import { HttpModule } from '@angular/http';
 import { SingleProductComponent } from './single-product/single-product.component';
+import { AlertComponent } from './alert/alert.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { SingleProductComponent } from './single-product/single-product.componen
     LoginComponent,
     CartComponent,
     SingleProductComponent,
+    AlertComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +52,8 @@ import { SingleProductComponent } from './single-product/single-product.componen
   ],
   entryComponents: [
     MessageSentDialogComponent,
-    SearchResultDialogComponent
+    SearchResultDialogComponent,
+    AlertComponent
   ],
   bootstrap: [AppComponent]
 })

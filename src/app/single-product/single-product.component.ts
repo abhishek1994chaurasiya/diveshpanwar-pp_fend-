@@ -2,6 +2,8 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ProductService } from '../services/product.service';
 import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { MatDialog } from '@angular/material';
+import { AlertComponent } from '../alert/alert.component';
 
 @Component({
   selector: 'app-single-product',
@@ -18,7 +20,8 @@ export class SingleProductComponent implements OnInit {
     private productService: ProductService,
     private cdRef: ChangeDetectorRef,
     private route: ActivatedRoute,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit() {
@@ -37,13 +40,11 @@ export class SingleProductComponent implements OnInit {
       });
       this.productService.singleProduct(productId).subscribe(
         res => {
-          // console.log(res.json());
           this.maxQty = [];
           this.product = res.json();
           for (let i = 0; i < this.product.maxQty; i++) {
             this.maxQty.push(String(i + 1));
           }
-          console.log(this.maxQty);
 
           this.cdRef.detectChanges();
         },
@@ -57,7 +58,6 @@ export class SingleProductComponent implements OnInit {
   }
 
   addToCart() {
-    console.log(this.cartForm.value);
     let productFound = false;
     if (window.localStorage.cart) {
       let productArray = [];
@@ -71,11 +71,19 @@ export class SingleProductComponent implements OnInit {
               Number(this.cartForm.get('productQuantity').value) >
             Number(this.product.maxQty)
           ) {
-            alert(
-              `You can add only ${
-                this.product.maxQty
-              } of this product into cart`
-            );
+            const dialogRef = this.dialog.open(AlertComponent, {
+              width: '90%',
+              data: {
+                type: 'warning',
+                message: `You can add only ${
+                  this.product.maxQty
+                } of this product into cart`
+              }
+            });
+
+            dialogRef.afterClosed().subscribe(result => {
+              console.log('The dialog was closed');
+            });
           } else {
             elem.productQuantity =
               Number(elem.productQuantity) +
