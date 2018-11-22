@@ -21,6 +21,9 @@
 .mt-6 {
   margin-top: 100px;
 }
+.mb-6 {
+  margin-bottom: 100px;
+}
 
 .pointer {
   cursor: pointer;

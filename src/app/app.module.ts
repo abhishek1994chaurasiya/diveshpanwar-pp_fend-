@@ -21,6 +21,7 @@ import { HttpModule } from '@angular/http';
 import { SingleProductComponent } from './single-product/single-product.component';
 import { AlertComponent } from './alert/alert.component';
 import { AuthGuard } from './guards/auth.guard';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { AuthGuard } from './guards/auth.guard';
     LoginComponent,
     CartComponent,
     SingleProductComponent,
-    AlertComponent
+    AlertComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
