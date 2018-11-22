@@ -23,6 +23,7 @@ export class SingleProductComponent implements OnInit {
 
   ngOnInit() {
     let productId = null;
+    this.maxQty = [];
     this.cartForm = this.formBuilder.group({
       productQuantity: 1,
       productId: null,
@@ -37,10 +38,13 @@ export class SingleProductComponent implements OnInit {
       this.productService.singleProduct(productId).subscribe(
         res => {
           // console.log(res.json());
+          this.maxQty = [];
           this.product = res.json();
           for (let i = 0; i < this.product.maxQty; i++) {
             this.maxQty.push(String(i + 1));
           }
+          console.log(this.maxQty);
+
           this.cdRef.detectChanges();
         },
         err => {
@@ -67,7 +71,11 @@ export class SingleProductComponent implements OnInit {
               Number(this.cartForm.get('productQuantity').value) >
             Number(this.product.maxQty)
           ) {
-            alert(`You can add only ${this.product.maxQty} of this product into cart`);
+            alert(
+              `You can add only ${
+                this.product.maxQty
+              } of this product into cart`
+            );
           } else {
             elem.productQuantity =
               Number(elem.productQuantity) +

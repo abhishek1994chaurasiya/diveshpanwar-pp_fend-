@@ -1,7 +1,14 @@
-import { Component, OnInit, DoCheck, Inject, ChangeDetectorRef } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  DoCheck,
+  Inject,
+  ChangeDetectorRef
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { ProductService } from '../services/product.service';
 @Component({
   selector: 'app-navigation',
   templateUrl: './navigation.component.html',
@@ -12,11 +19,15 @@ export class NavigationComponent implements OnInit {
   userLoggedIn = false;
   searchForm: FormGroup;
   cartCount = 0;
+  dialogRef = null;
+  products: any;
+
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
     public dialog: MatDialog,
-    private cdRef: ChangeDetectorRef
+    private cdRef: ChangeDetectorRef,
+    private productService: ProductService
   ) {
     console.log(this.userLoggedIn);
   }
@@ -50,20 +61,42 @@ export class NavigationComponent implements OnInit {
   }
 
   search(): void {
-    const dialogRef = this.dialog.open(SearchResultDialogComponent, {
-      width: '90%',
-      data: { name: 'Divesh Panwar' }
-    });
+    this.products = null;
+    if (this.searchForm.get('searchCriteria').value) {
+      this.productService.searchProduct(this.searchForm.value).subscribe(
+        res => {
+          console.log(res.json());
+          this.products = res.json();
+          this.dialogRef = this.dialog.open(SearchResultDialogComponent, {
+            width: '90%',
+            data: { products: this.products }
+          });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    });
+          this.dialogRef.afterClosed().subscribe(result => {
+            console.log('The dialog was closed');
+          });
+        },
+        err => {
+          console.log(err);
+          this.products = false;
+          this.dialogRef = this.dialog.open(SearchResultDialogComponent, {
+            width: '90%',
+            data: { products: this.products }
+          });
+
+          this.dialogRef.afterClosed().subscribe(result => {
+            console.log('The dialog was closed');
+          });
+        }
+      );
+    }
   }
 }
 
 @Component({
   selector: 'app-search-diaog',
-  templateUrl: 'search-result.dialog.component.html'
+  templateUrl: 'search-result.dialog.component.html',
+  styleUrls: ['./search-result.dialog.component.css']
 })
 export class SearchResultDialogComponent {
   constructor(
@@ -72,6 +105,7 @@ export class SearchResultDialogComponent {
   ) {}
 
   onNoClick(): void {
+    console.log('I am clicked');
     this.dialogRef.close();
   }
 }

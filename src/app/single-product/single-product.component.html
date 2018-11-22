@@ -2,9 +2,10 @@
   <div class="col-6 ml-auto mr-auto mt-1 mb-3" *ngIf="product">
     <div class="card box-shadows">
       <img class="card-img-top image-styling img-fluid mx-auto d-block img-thumbnail pl-2 pr-2" src="{{product.imgUrl}}"
-        alt="{{product.displayName}}">
+        alt="{{product.displayName}}" style="margin-top: 3%">
       <div class="card-body">
         <h5 class="card-title text-center font-weight-bold special-font">{{product.displayName}}</h5>
+        <hr class="special-hr">
         <p class="text-center special-font">
           {{product.desc}}
         </p>

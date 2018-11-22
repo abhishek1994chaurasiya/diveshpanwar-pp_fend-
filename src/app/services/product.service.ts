@@ -14,4 +14,8 @@ export class ProductService {
   singleProduct(productId) {
     return this.http.post('http://localhost:3000/singleProduct', {productId: productId});
   }
+
+  searchProduct(searchData) {
+    return this.http.post('http://localhost:3000/searchProduct', searchData);
+  }
 }
