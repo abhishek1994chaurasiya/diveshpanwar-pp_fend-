@@ -21,4 +21,8 @@ export class AddressService {
     // console.log(formData);
     return this.http.post('http://localhost:3000/editAddress', formData);
   }
+
+  deleteAddress(addressId) {
+    return this.http.post('http://localhost:3000/deleteAddress', {addressId: addressId});
+  }
 }

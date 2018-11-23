@@ -22,4 +22,9 @@ export class CardService {
     return this.http.post('http://localhost:3000/editCard', formData);
   }
 
+  deleteCard(cardId) {
+    return this.http.post('http://localhost:3000/deleteCard', {cardId: cardId});
+  }
+
+
 }

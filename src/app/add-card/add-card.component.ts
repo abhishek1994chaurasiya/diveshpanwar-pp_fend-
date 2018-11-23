@@ -100,7 +100,7 @@ export class AddCardComponent implements OnInit {
           width: '50%',
           data: {
             type: 'success',
-            message: `Card added, id is ${res.json()._id}`
+            message: `Card added.`
           }
         });
 

@@ -1,5 +1,102 @@
 <div class="container-fluid mb-6">
-  <h4 class="special-font text-center mt-6">Addresses</h4>
+  <div class="row mt-6">
+    <div class="col-10">
+      <h4 class="text-center special-font mt-3">
+        User Profile
+      </h4>
+    </div>
+    <div class="col-2 text-center" style="base">
+      <a href="JavaScript:void(0)" (click)="toggleProfileEditor()">
+        <mat-icon title="Edit Address">edit</mat-icon>
+      </a>
+    </div>
+  </div>
+  <hr class="special-hr">
+  <div class="row mt-3">
+    <div class="col-8 col-sm-8 col-md-6 col-lg-6 offset-2 offset-sm-2 offset-md-3 offset-lg-3">
+      <div class="card">
+        <div class="card-body text-center">
+          <form [formGroup]="signupForm" (ngSubmit)="editProfile()">
+            <div class="col">
+              <small class="text-center text-warning special-font">All fields are mandatory</small>
+            </div>
+            <mat-form-field appearance="outline" class="inp-control text-center special-font">
+              <mat-label>Username</mat-label>
+              <mat-icon matPrefix>perm_identity</mat-icon>
+              <input matInput placeholder="Name" formControlName="username" autocomplete="off">
+              <mat-hint>Please enter a username</mat-hint>
+              <mat-error *ngIf="signupForm.controls.username.hasError('pattern') && !signupForm.controls.username.hasError('required')">
+                Please enter a valid username
+              </mat-error>
+              <mat-error *ngIf="signupForm.controls.username.hasError('required')">
+                Username is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="inp-control text-center special-font">
+              <mat-label>Email Address</mat-label>
+              <mat-icon matPrefix>contact_mail</mat-icon>
+              <input matInput placeholder="Email Address" [type]='"email"' formControlName="email" autocomplete="off"
+                [attr.disabled]="disabled">
+              <mat-hint>Enter a valid email address</mat-hint>
+              <mat-error *ngIf="signupForm.controls.email.hasError('email') && !signupForm.controls.email.hasError('required')">
+                Please enter a valid email address
+              </mat-error>
+              <mat-error *ngIf="signupForm.controls.email.hasError('required')">
+                Email is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="inp-control text-center special-font">
+              <mat-label>Contact Number</mat-label>
+              <mat-icon matPrefix>comment</mat-icon>
+              <input matInput [type]='"number"' placeholder="Contact Number" formControlName="contact" autocomplete="off">
+              <mat-hint>Enter a valid contact number (0-9)</mat-hint>
+              <mat-error *ngIf="signupForm.controls.contact.hasError('pattern') && !signupForm.controls.contact.hasError('required')">
+                Please enter a valid contact number.
+              </mat-error>
+              <mat-error *ngIf="signupForm.controls.contact.hasError('required')">
+                Contact Number is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="inp-control text-center special-font">
+              <mat-label>Password</mat-label>
+              <mat-icon matPrefix>settings_ethernet</mat-icon>
+              <input matInput placeholder="Password" [type]='"password"' formControlName="password" autocomplete="off"
+                (keyup)="toggleInvalidPassword()">
+              <mat-hint>Enter a valid password</mat-hint>
+              <mat-error *ngIf="signupForm.controls.password.hasError('required')">
+                Password is <strong>required</strong>
+              </mat-error>
+              <small class="text-danger" *ngIf="invalidPassword && !signupForm.controls.password.hasError('required')">Password
+                should contain atleast one uppercase, one lowercase, one special and one numeric character, and should
+                be 8 character long</small>
+            </mat-form-field>
+            <div class="text-center mt-3" *ngIf="editProfileData">
+              <button mat-flat-button type="submit" color="accent" [disabled]="!signupForm.valid">
+                <i class="far fa-envelope"></i>&nbsp;
+                <span class="special-font">Update</span>
+              </button> &nbsp;
+              <button mat-flat-button type="submit" color="primary" (click)="cancel()">
+                <mat-icon>close</mat-icon>&nbsp;
+                <span class="special-font">Cancel</span>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="row mt-6">
+    <div class="col-10">
+      <h4 class="special-font text-center">Addresses</h4>
+    </div>
+    <div class="col-2 text-center" style="base">
+      <a routerLink="/addAddress">
+        <mat-icon title="Add Address">add_circle</mat-icon>
+      </a>
+    </div>
+  </div>
   <hr class="special-hr">
   <div class="row mt-3 mb-6" *ngIf="addresses && addresses.length > 0">
     <div class="col col-8 col-md col-md-4 mt-2" *ngFor="let address of addresses">
@@ -11,10 +108,10 @@
           <p class="text-center text-dark font-weight-bold font-italic">{{address.address}}</p>
           <div class="form-group form-row">
             <div class="col text-right">
-                <mat-icon class="text-warning pointer" (click)="editAddress(address._id)">edit</mat-icon>
+              <mat-icon class="text-warning pointer" (click)="editAddress(address._id)">edit</mat-icon>
             </div>
             <div class="col text-left">
-                <mat-icon class="text-danger pointer" (click)="deleteAddress(address._id)">delete_forever</mat-icon>
+              <mat-icon class="text-danger pointer" (click)="deleteAddress(address._id)">delete_forever</mat-icon>
             </div>
           </div>
         </div>
@@ -24,8 +121,16 @@
   <div class="mt-3 mb-3 text-center" *ngIf="addresses && addresses.length == 0">
     <h5 class="text-center text-info special-font">No Addresses Available Yet</h5>
   </div>
-
-  <h4 class="special-font text-center mt-6">Cards</h4>
+  <div class="row mt-6">
+    <div class="col-10">
+      <h4 class="special-font text-center">Cards</h4>
+    </div>
+    <div class="col-2 text-center" style="base">
+      <a routerLink="/addCard">
+        <mat-icon title="Add Card">add_circle</mat-icon>
+      </a>
+    </div>
+  </div>
   <hr class="special-hr">
   <div class="row mt-3 mb-6" *ngIf="cards && cards.length > 0">
     <div class="col col-8 col-md col-md-4 mt-2" *ngFor="let card of cards">
@@ -37,10 +142,10 @@
           <h6 class="text-center text-dark">{{card.expiry}}</h6>
           <div class="form-group form-row">
             <div class="col text-right">
-                <mat-icon class="text-warning pointer" (click)="editCard(card._id)">edit</mat-icon>
+              <mat-icon class="text-warning pointer" (click)="editCard(card._id)">edit</mat-icon>
             </div>
             <div class="col text-left">
-                <mat-icon class="text-danger pointer" (click)="deleteCard(card._id)">delete_forever</mat-icon>
+              <mat-icon class="text-danger pointer" (click)="deleteCard(card._id)">delete_forever</mat-icon>
             </div>
           </div>
         </div>

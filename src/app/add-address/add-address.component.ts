@@ -54,7 +54,7 @@ export class AddAddressComponent implements OnInit {
           width: '50%',
           data: {
             type: 'success',
-            message: `Address added, id is ${res.json().addressId}`
+            message: `Address added.`
           }
         });
 

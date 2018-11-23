@@ -62,6 +62,7 @@ export class SignupComponent implements OnInit {
         // this.signupForm.reset();
         setTimeout(() => {
           this.response = false;
+          dialogRef.close();
           this.router.navigate(['/login']);
         }, 3000);
 
