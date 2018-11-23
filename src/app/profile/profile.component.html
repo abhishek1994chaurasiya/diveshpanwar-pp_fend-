@@ -1,18 +1,49 @@
 <div class="container-fluid mb-6">
-  <div class="row mt-6">
-    <div class="col-10">
-      <h4 class="text-center special-font mt-3">
-        User Profile
-      </h4>
-    </div>
-    <div class="col-2 text-center" style="base">
+  <div class="mt-6 text-center">
+    <h4 class="text-center special-font mt-3">
+      User Profile
+
       <a href="JavaScript:void(0)" (click)="toggleProfileEditor()">
         <mat-icon title="Edit Address">edit</mat-icon>
       </a>
-    </div>
+    </h4>
   </div>
   <hr class="special-hr">
-  <div class="row mt-3">
+
+  <div class="row mt-3" *ngIf="!editProfileData">
+    <div class="col-8 col-sm-8 col-md-6 col-lg-6 ml-auto mr-auto">
+      <div class="card">
+        <div class="card-body text-center special-font">
+          <div class="form-row">
+            <div class="col-4 text-right">
+              <mat-icon>perm_identity</mat-icon>
+            </div>
+            <div class="col text-left">
+              <h4>{{profileData?.username || 'NA'}}</h4>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col-4 text-right">
+              <mat-icon>contact_mail</mat-icon>
+            </div>
+            <div class="col text-left">
+              <h4>{{profileData?.email || 'NA'}}</h4>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col-4 text-right">
+              <mat-icon>comment</mat-icon>
+            </div>
+            <div class="col text-left">
+              <h4>{{profileData?.contact || 'NA'}}</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-3" *ngIf="editProfileData">
     <div class="col-8 col-sm-8 col-md-6 col-lg-6 offset-2 offset-sm-2 offset-md-3 offset-lg-3">
       <div class="card">
         <div class="card-body text-center">
@@ -87,19 +118,16 @@
   </div>
 
 
-  <div class="row mt-6">
-    <div class="col-10">
-      <h4 class="special-font text-center">Addresses</h4>
-    </div>
-    <div class="col-2 text-center" style="base">
+  <div class="mt-6">
+    <h4 class="special-font text-center">Addresses
       <a routerLink="/addAddress">
         <mat-icon title="Add Address">add_circle</mat-icon>
       </a>
-    </div>
+    </h4>
   </div>
   <hr class="special-hr">
   <div class="row mt-3 mb-6" *ngIf="addresses && addresses.length > 0">
-    <div class="col col-8 col-md col-md-4 mt-2" *ngFor="let address of addresses">
+    <div class="col col-8 col-md col-md-4 mt-2 ml-auto mr-auto" *ngFor="let address of addresses">
       <div class="card box-shadows">
         <div class="card-body">
           <h5 class="card-title text-center font-weight-bold special-font">{{address.name}}</h5>
@@ -121,19 +149,16 @@
   <div class="mt-3 mb-3 text-center" *ngIf="addresses && addresses.length == 0">
     <h5 class="text-center text-info special-font">No Addresses Available Yet</h5>
   </div>
-  <div class="row mt-6">
-    <div class="col-10">
-      <h4 class="special-font text-center">Cards</h4>
-    </div>
-    <div class="col-2 text-center" style="base">
+  <div class= "mt-6">
+    <h4 class="special-font text-center">Cards
       <a routerLink="/addCard">
         <mat-icon title="Add Card">add_circle</mat-icon>
       </a>
-    </div>
+    </h4>
   </div>
   <hr class="special-hr">
   <div class="row mt-3 mb-6" *ngIf="cards && cards.length > 0">
-    <div class="col col-8 col-md col-md-4 mt-2" *ngFor="let card of cards">
+    <div class="col col-8 col-md col-md-4 mt-2  ml-auto mr-auto" *ngFor="let card of cards">
       <div class="card box-shadows">
         <div class="card-body">
           <h5 class="card-title text-center font-weight-bold special-font">{{card.cardType | titlecase}}</h5>
