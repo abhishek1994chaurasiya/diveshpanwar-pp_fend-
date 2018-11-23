@@ -22,6 +22,14 @@ import { SingleProductComponent } from './single-product/single-product.componen
 import { AlertComponent } from './alert/alert.component';
 import { AuthGuard } from './guards/auth.guard';
 import { FooterComponent } from './footer/footer.component';
+import { AddAddressComponent } from './add-address/add-address.component';
+import { AddCardComponent } from './add-card/add-card.component';
+import { EditCardComponent } from './edit-card/edit-card.component';
+import { EditAddressComponent } from './edit-address/edit-address.component';
+import { ProfileComponent } from './profile/profile.component';
+import { CardService } from './services/card.service';
+import { ProfileService } from './services/profile.service';
+import { AddressService } from './services/address.service';
 
 @NgModule({
   declarations: [
@@ -36,7 +44,12 @@ import { FooterComponent } from './footer/footer.component';
     CartComponent,
     SingleProductComponent,
     AlertComponent,
-    FooterComponent
+    FooterComponent,
+    AddAddressComponent,
+    AddCardComponent,
+    EditCardComponent,
+    EditAddressComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -52,7 +65,10 @@ import { FooterComponent } from './footer/footer.component';
   providers: [
     AuthService,
     ProductService,
-    AuthGuard
+    AuthGuard,
+    CardService,
+    AddressService,
+    ProfileService
   ],
   entryComponents: [
     MessageSentDialogComponent,

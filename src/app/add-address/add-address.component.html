@@ -1,0 +1,58 @@
+<div class="container-fluid" *ngIf="!mailSent">
+  <h4 class="text-center special-font mt-3">
+    Add Address
+  </h4>
+  <hr class="special-hr">
+  <div class="row mt-3">
+    <div class="col-8 col-sm-8 col-md-6 col-lg-6 offset-2 offset-sm-2 offset-md-3 offset-lg-3">
+      <div class="card">
+        <div class="card-body text-center">
+            <form [formGroup]="addressForm" (ngSubmit)="add()">
+              <div class="col">
+                <small class="text-center text-warning special-font">All fields are mandatory</small>
+              </div>
+              <mat-form-field appearance="outline" class="inp-control text-center special-font">
+                <mat-label>Name</mat-label>
+                <mat-icon matPrefix>perm_identity</mat-icon>
+                <input matInput placeholder="Name" formControlName="name" autocomplete="off">
+                <mat-hint>Please enter a name</mat-hint>
+                <mat-error *ngIf="addressForm.controls.name.hasError('pattern') && !addressForm.controls.name.hasError('required')">
+                  Please enter a valid name
+                </mat-error>
+                <mat-error *ngIf="addressForm.controls.name.hasError('required')">
+                  Name is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field appearance="outline" class="inp-control text-center special-font">
+                <mat-label>Contact Number</mat-label>
+                <mat-icon matPrefix>comment</mat-icon>
+                <input matInput [type]='"number"' placeholder="Contact Number" formControlName="contact" autocomplete="off">
+                <mat-hint>Enter a valid contact number (0-9)</mat-hint>
+                <mat-error *ngIf="addressForm.controls.contact.hasError('pattern') && !addressForm.controls.contact.hasError('required')">
+                  Please enter a valid contact number.
+                </mat-error>
+                <mat-error *ngIf="addressForm.controls.contact.hasError('required')">
+                  Contact Number is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field appearance="outline" class="inp-control text-center special-font">
+                <mat-label>Address</mat-label>
+                <mat-icon matPrefix>home</mat-icon>
+                <textarea matInput placeholder="Address" formControlName="address" autocomplete="off"></textarea>
+                <mat-hint>Enter a valid address</mat-hint>
+                <mat-error *ngIf="addressForm.controls.address.hasError('required')">
+                  Address Number is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+              <div class="text-center mt-3">
+                  <button mat-flat-button type="submit" color="accent" [disabled]="!addressForm.valid">
+                      <mat-icon matPrefix>home</mat-icon>&nbsp;
+                    <span class="special-font">Add</span>
+                  </button>
+              </div>
+            </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

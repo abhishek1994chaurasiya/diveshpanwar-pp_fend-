@@ -9,13 +9,17 @@
   <div fxLayout="row" fxShow="false" fxShow.gt-sm class="special-font">
     <button mat-button routerLink="/login" class="bigger-fonts special-font" *ngIf="!userLoggedIn">Login</button>
     <button mat-button routerLink="/signup" class="bigger-fonts special-font" *ngIf="!userLoggedIn">Signup</button>
-    <button mat-button routerLink="/dashboard" class="bigger-fonts special-font" *ngIf="userLoggedIn">Dashboard</button>
+    <button mat-button routerLink="/profile" class="bigger-fonts special-font" *ngIf="userLoggedIn">Profile</button>
+    <button mat-button routerLink="/addAddress" class="bigger-fonts special-font">Add Address</button>
+
+    <button mat-button routerLink="/addCard" class="bigger-fonts special-font">Add Card</button>
+
     <button mat-button (click)="logout()" class="bigger-fonts special-font" *ngIf="userLoggedIn">Logout</button>
     <button mat-button class="bigger-fonts special-font" routerLink="/cart">
       <i class="material-icons">
         shopping_cart
       </i>
-      <span class="badge badge-pill badge-dark" >{{cartCount}}</span>
+      <span class="badge badge-pill badge-dark">{{cartCount}}</span>
     </button>
   </div>
   <button mat-button [mat-menu-trigger-for]="menu" fxHide="false" fxHide.gt-sm>
@@ -26,13 +30,15 @@
 <mat-menu x-position="before" #menu="matMenu">
   <button mat-menu-item routerLink="/login" *ngIf="!userLoggedIn">Login</button>
   <button mat-menu-item routerLink="/signup" *ngIf="!userLoggedIn">Signup</button>
-  <button mat-menu-item routerLink="/dashboard" *ngIf="userLoggedIn">Dashboard</button>
+  <button mat-menu-item routerLink="/profile" *ngIf="userLoggedIn">Profile</button>
+  <button mat-menu-item routerLink="/addAddress">Add Address</button>
+  <button mat-menu-item routerLink="/addCard">Add Card</button>
   <button mat-menu-item (click)="logout()" *ngIf="userLoggedIn">Logout</button>
   <button mat-menu-item routerLink="/cart">
     <i class="material-icons">
       shopping_cart
     </i>
-    <span class="badge badge-pill badge-dark" >{{cartCount}}</span>
+    <span class="badge badge-pill badge-dark">{{cartCount}}</span>
   </button>
 
   <!--<button mat-menu-item>Help</button>-->

@@ -1,0 +1,63 @@
+<div class="container-fluid" *ngIf="!mailSent">
+  <h4 class="text-center special-font mt-3">
+    Add Card
+  </h4>
+  <hr class="special-hr">
+  <div class="row mt-3">
+    <div class="col-8 col-sm-8 col-md-6 col-lg-6 offset-2 offset-sm-2 offset-md-3 offset-lg-3">
+      <div class="card">
+        <div class="card-body text-center">
+          <form [formGroup]="cardForm" (ngSubmit)="add()">
+            <div class="col">
+              <small class="text-center text-warning special-font">All fields are mandatory</small>
+            </div>
+            <mat-form-field appearance="outline" class="inp-control text-center special-font">
+              <mat-label>Card Type</mat-label>
+              <mat-icon matPrefix>attach_money</mat-icon>
+              <mat-select placeholder="Card Type" formControlName="cardType" class="special-font">
+                <mat-option *ngFor="let card of cards" [value]="card.value">
+                  {{card.viewValue}}
+                </mat-option>
+              </mat-select>
+              <mat-hint>Please choose a card type</mat-hint>
+              <mat-error *ngIf="cardForm.controls.cardType.hasError('required')">
+                Card type is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="inp-control text-center special-font">
+              <mat-label>Card Number</mat-label>
+              <mat-icon matPrefix>credit_card</mat-icon>
+              <input matInput [type]='"number"' placeholder="Card Number" formControlName="cardNumber" autocomplete="off">
+              <mat-hint>Enter a valid contact number (0-9)</mat-hint>
+              <mat-error *ngIf="cardForm.controls.cardNumber.hasError('pattern') && !cardForm.controls.cardNumber.hasError('required')">
+                Please enter a valid card number.
+              </mat-error>
+              <mat-error *ngIf="cardForm.controls.cardNumber.hasError('required')">
+                Card Number is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="inp-control text-center special-font">
+              <mat-label>Card Expiry Date</mat-label>
+
+              <input matInput [matDatepicker]="dp" placeholder="Month and Year" formControlName="expiry">
+              <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+              <mat-datepicker #dp startView="multi-year" (yearSelected)="chosenYearHandler($event)" (monthSelected)="chosenMonthHandler($event, dp)"
+                panelClass="example-month-picker">
+              </mat-datepicker>
+              <mat-hint>Choose Valid Card Expiry date</mat-hint>
+              <mat-error *ngIf="cardForm.controls.expiry.hasError('required')">
+                  Card Number is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+            <div class="text-center mt-3">
+              <button mat-flat-button type="submit" color="accent" [disabled]="!cardForm.valid">
+                  <mat-icon matPrefix>credit_card</mat-icon>&nbsp;
+                <span class="special-font">Add</span>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
