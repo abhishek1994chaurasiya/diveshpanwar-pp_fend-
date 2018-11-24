@@ -11,4 +11,9 @@ export class CartService {
   addBulkCart(products) {
     return this.http.post('http://localhost:3000/addBulkCart', {products: products});
   }
+
+
+  getCartItems(userId) {
+    return this.http.post('http://localhost:3000/getCartItems', {userId: userId});
+  }
 }

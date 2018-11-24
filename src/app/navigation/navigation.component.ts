@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { ProductService } from '../services/product.service';
+import { CartService } from '../services/cart.service';
 @Component({
   selector: 'app-navigation',
   templateUrl: './navigation.component.html',
@@ -21,13 +22,15 @@ export class NavigationComponent implements OnInit {
   cartCount = 0;
   dialogRef = null;
   products: any;
-
+  userId = null;
+  requestSent = false;
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
     public dialog: MatDialog,
     private cdRef: ChangeDetectorRef,
-    private productService: ProductService
+    private productService: ProductService,
+    private cartService: CartService
   ) {
     console.log(this.userLoggedIn);
   }
@@ -49,6 +52,18 @@ export class NavigationComponent implements OnInit {
       let cart = JSON.parse(window.localStorage.cart);
       this.cartCount = cart.length;
       // console.log(this.cartCount);
+    } else if (this.userLoggedIn && !this.requestSent) {
+      this.userId = window.sessionStorage.getItem('user_id');
+      this.cartService.getCartItems(this.userId).subscribe(
+        res => {
+          console.log(res.json());
+          this.requestSent = true;
+        },
+        err => {
+          console.log(err);
+          this.requestSent = false;
+        }
+      );
     } else {
       this.cartCount = 0;
     }

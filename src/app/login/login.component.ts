@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
   mailSent = false;
   response = false;
   invalidPassword = false;
-
+  userId = null;
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
@@ -41,17 +41,20 @@ export class LoginComponent implements OnInit {
       this.authService.login(this.loginForm.value).subscribe(
         res => {
           console.log(res);
-          const userId = res.userId;
+          this.userId = res.id;
           window.sessionStorage.setItem('user_id', res.id);
           window.sessionStorage.setItem('loggedIn', 'true');
-
+          console.log(this.userId);
           if (window.localStorage.cart) {
             let cartArray = [];
             const cart = JSON.parse(window.localStorage.cart);
-            cart.forEach(element => {
-              element.userId = userId;
+            cart.forEach((element) => {
+              console.log(this.userId);
+              element.userId = this.userId;
               cartArray.push(element);
             });
+            console.log(cartArray);
+
             this.cartService.addBulkCart(cartArray).subscribe(
               res => {
                 console.log(res.json());
@@ -59,13 +62,7 @@ export class LoginComponent implements OnInit {
                   width: '80%',
                   data: {
                     type: 'success',
-                    message: res.json().insertedCount
-                      ? `${res.json().insertedCount} Products added to cart.`
-                      : res.json().notAdded === 0
-                      ? `${res.json().added} Products added to cart.`
-                      : `${res.json().added} Products added, ${
-                          res.json().notAdded
-                        } not added to cart due to max quantity.`
+                    message: 'Products in cart added to account'
                   }
                 });
 
