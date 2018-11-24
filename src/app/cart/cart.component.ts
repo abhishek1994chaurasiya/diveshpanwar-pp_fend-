@@ -21,6 +21,7 @@ export class CartComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.total = 0;
     this.userId = window.sessionStorage.getItem('user_id');
     const status = window.sessionStorage.getItem('loggedIn');
     if (status === 'true') {
@@ -48,9 +49,6 @@ export class CartComponent implements OnInit {
         }
       );
 
-  }
-
-  ngDoCheck(): void {
   }
 
   removeCartItem(cartId) {
@@ -94,23 +92,23 @@ export class CartComponent implements OnInit {
     let cart = JSON.parse(window.localStorage.cart);
     let cartArray = [];
     cart.forEach(element => {
-      if (element._id === product._id) {
+      if (element.productId === product.productId) {
         element.productQuantity = Number(element.productQuantity) + 1;
         productToAdd = element;
       }
       cartArray.push(element);
     });
-    console.log(cartArray);
-
     window.localStorage.cart = JSON.stringify(cartArray);
+
     this.cartService.toggleQuantity(productToAdd).subscribe(
       res => {
         console.log(res.json());
+        this.ngOnInit();
       }, err => {
         console.log(err.json());
       }
     );
-    this.ngOnInit();
+    this.cdRef.detectChanges();
   }
 
   decreaseQuantity(product) {
@@ -130,10 +128,11 @@ export class CartComponent implements OnInit {
     this.cartService.toggleQuantity(productToAdd).subscribe(
       res => {
         console.log(res.json());
+        this.ngOnInit();
       }, err => {
         console.log(err.json());
       }
     );
-    this.ngOnInit();
+    this.cdRef.detectChanges();
   }
 }
