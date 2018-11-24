@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material';
 import { AlertComponent } from '../alert/alert.component';
 import { CartService } from '../services/cart.service';
+import { WishlistService } from '../services/wishlist.service';
 
 @Component({
   selector: 'app-single-product',
@@ -18,14 +19,15 @@ export class SingleProductComponent implements OnInit {
   maxQty = [];
   userId = null;
   userLoggedIn = null;
-
+  wishListForm: FormGroup;
   constructor(
     private productService: ProductService,
     private cdRef: ChangeDetectorRef,
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
     public dialog: MatDialog,
-    private cartService: CartService
+    private cartService: CartService,
+    private wishlistService: WishlistService
   ) {}
 
   ngOnInit() {
@@ -47,12 +49,29 @@ export class SingleProductComponent implements OnInit {
       offerPrice: null,
       discount: null,
       maxQty: null,
-      extra: null
+      extra: null,
+      imgUrl: null
     });
+
+    this.wishListForm = this.formBuilder.group({
+      productQuantity: 1,
+      productId: null,
+      userId: null,
+      displayName: null,
+      price: null,
+      offerPrice: null,
+      discount: null,
+      extra: null,
+      imgUrl: null
+    });
+
     this.error = false;
     this.route.params.subscribe(param => {
       productId = param.productId;
       this.cartForm.patchValue({
+        productId: productId
+      });
+      this.wishListForm.patchValue({
         productId: productId
       });
       this.productService.singleProduct(productId).subscribe(
@@ -62,6 +81,12 @@ export class SingleProductComponent implements OnInit {
           this.cartForm.patchValue(this.product);
           if (this.userId) {
             this.cartForm.patchValue({
+              userId: this.userId
+            });
+          }
+          this.wishListForm.patchValue(this.product);
+          if (this.userId) {
+            this.wishListForm.patchValue({
               userId: this.userId
             });
           }
@@ -134,7 +159,6 @@ export class SingleProductComponent implements OnInit {
       // dialogRef.afterClosed().subscribe(result => {
       //   console.log('The dialog was closed');
       // });
-
     } else {
       let productArray = [];
       productArray.push(this.cartForm.value);
@@ -151,5 +175,38 @@ export class SingleProductComponent implements OnInit {
         }
       );
     }
+  }
+
+  addToWishList() {
+    this.wishlistService.addToWishlist(this.wishListForm.value).subscribe(
+      res => {
+        console.log(res);
+        const dialogRef = this.dialog.open(AlertComponent, {
+          width: '90%',
+          data: {
+            type: 'success',
+            message: `Product added to wishlist`
+          }
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+          console.log('The dialog was closed');
+        });
+      },
+      err => {
+        console.log(err.json());
+        const dialogRef = this.dialog.open(AlertComponent, {
+          width: '90%',
+          data: {
+            type: err.json() ? 'info' : 'danger',
+            message: err.json() ? err.json().message : `Something went wrong`
+          }
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+          console.log('The dialog was closed');
+        });
+      }
+    );
   }
 }

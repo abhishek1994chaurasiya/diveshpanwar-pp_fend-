@@ -76,6 +76,7 @@ export class NavigationComponent implements OnInit {
     this.userId = null;
     this.userLoggedIn = null;
     this.requestSent = false;
+    window.localStorage.removeItem('cart');
     this.router.navigate(['/login']);
   }
 

@@ -31,6 +31,8 @@ import { CardService } from './services/card.service';
 import { ProfileService } from './services/profile.service';
 import { AddressService } from './services/address.service';
 import { CartService } from './services/cart.service';
+import { WishlistService } from './services/wishlist.service';
+import { WishlistComponent } from './wishlist/wishlist.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +52,8 @@ import { CartService } from './services/cart.service';
     AddCardComponent,
     EditCardComponent,
     EditAddressComponent,
-    ProfileComponent
+    ProfileComponent,
+    WishlistComponent
   ],
   imports: [
     BrowserModule,
@@ -70,7 +73,8 @@ import { CartService } from './services/cart.service';
     CardService,
     AddressService,
     ProfileService,
-    CartService
+    CartService,
+    WishlistService
   ],
   entryComponents: [
     MessageSentDialogComponent,

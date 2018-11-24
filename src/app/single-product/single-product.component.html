@@ -57,15 +57,20 @@
             <div class="col text-left">
               <select name="productQuantity" id="productQuantity" formControlName="productQuantity" class="form-control col-7 col-md-3"
                 style="height: 2rem; font-size: 0.8rem;" *ngIf="maxQty">
-                <option *ngFor="let counter of maxQty" value={{counter}} >{{counter}}</option>
+                <option *ngFor="let counter of maxQty" value={{counter}}>{{counter}}</option>
               </select>
 
             </div>
           </div>
           <div class="form-group text-center ">
-            <input type="submit" value="Add To Cart" class="btn btn-outline-warning text-dark special-font font-weight-bold">
+            <input type="submit" value="Add To Cart" class="btn btn-outline-warning text-dark special-font font-weight-bold col-6">
           </div>
         </form>
+        <div class="form-group text-center " *ngIf="userLoggedIn">
+          <button class="btn btn-outline-info text-dark special-font font-weight-bold col-6" (click)="addToWishList()">Add
+            To Wishlist</button>
+        </div>
+
       </div>
 
     </div>
