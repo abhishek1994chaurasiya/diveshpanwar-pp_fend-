@@ -15,7 +15,7 @@ export class SingleProductComponent implements OnInit {
   error = false;
   cartForm: FormGroup;
   maxQty = [];
-
+  userId = null;
   constructor(
     private productService: ProductService,
     private cdRef: ChangeDetectorRef,
@@ -25,12 +25,20 @@ export class SingleProductComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+
+    this.userId = window.sessionStorage.getItem('user_id');
     let productId = null;
     this.maxQty = [];
     this.cartForm = this.formBuilder.group({
       productQuantity: 1,
       productId: null,
-      userId: null
+      userId: null,
+      displayName: null,
+      price: null,
+      offerPrice: null,
+      discount: null,
+      maxQty: null,
+      extra: null
     });
     this.error = false;
     this.route.params.subscribe(param => {
@@ -42,6 +50,12 @@ export class SingleProductComponent implements OnInit {
         res => {
           this.maxQty = [];
           this.product = res.json();
+          this.cartForm.patchValue(this.product);
+          if(this.userId) {
+            this.cartForm.patchValue({
+              userId: this.userId
+            })
+          }
           for (let i = 0; i < this.product.maxQty; i++) {
             this.maxQty.push(String(i + 1));
           }

@@ -30,6 +30,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { CardService } from './services/card.service';
 import { ProfileService } from './services/profile.service';
 import { AddressService } from './services/address.service';
+import { CartService } from './services/cart.service';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,8 @@ import { AddressService } from './services/address.service';
     AuthGuard,
     CardService,
     AddressService,
-    ProfileService
+    ProfileService,
+    CartService
   ],
   entryComponents: [
     MessageSentDialogComponent,
