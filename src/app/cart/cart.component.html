@@ -1,3 +1,47 @@
-<p>
-  cart works!
-</p>
+<div class="container-fluid mb-6 mt-3">
+  <h4 class="special-font text-center mt-3">Cart</h4>
+  <hr class="special-hr">
+  <div class="table-responsive col-10 ml-auto-mr-auto" *ngIf="products && products.length != 0">
+    <table class="table table-sm table-striped">
+      <thead>
+        <tr class="special-font">
+          <th scope="col">Product Name</th>
+          <th scope="col">Price per Item</th>
+          <th scope="col">Discount</th>
+          <th scope="col">Quantity</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of products">
+          <td class="special-font">{{product.displayName}}</td>
+          <td><del class="text-danger"> &#8377; {{product.price}}</del> &#8377;{{product.offerPrice}}</td>
+          <td>{{product.discount}}% <span *ngIf="product.extra">Extra &#8377; {{product.extra}} off</span></td>
+          <td class="text-center">
+            <div class="form-row">
+              <div class="col">
+                <mat-icon *ngIf="product.productQuantity > 1" class="pointer" (click)="decreaseQuantity(product)">arrow_left</mat-icon>
+              </div>
+              <div class="col"><span style="font-size: 1.5rem" class="special-font">{{product.productQuantity}}</span></div>
+              <div class="col">
+                <mat-icon *ngIf="product.productQuantity <= product.maxQty" class="pointer" (click)="increaseQuantity(product)">arrow_right</mat-icon>
+              </div>
+            </div>
+          </td>
+          <td>
+            <button class="btn btn-outline-dark special-font btn-sm font-weight-bold" (click)="removeCartItem(product._id)">Remove</button>
+
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <hr class="special-hr">
+    <h5 class="text-center text-dark special-font">&#8377; {{total}} (Delivery Carges will apply on checkout)</h5>
+  </div>
+
+  <div class="row mt-3 mb-3" *ngIf="products && products.length == 0">
+    <h5 class="text-center text-info special-font">No Products Available Yet</h5>
+  </div>
+
+</div>

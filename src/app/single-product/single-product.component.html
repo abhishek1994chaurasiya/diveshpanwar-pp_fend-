@@ -14,7 +14,7 @@
             <h6 class="font-italic"><strong>Price:</strong></h6>
           </div>
           <div class="col text-left">
-            <h6 class="font-italic"><del class="text-danger">{{product.price}}</del></h6>
+            <h6 class="font-italic"><del class="text-danger"> &#8377; {{product.price}}</del></h6>
           </div>
         </div>
         <div class="row">
@@ -22,9 +22,18 @@
             <h6 class="font-italic"><strong>Offer Price:</strong></h6>
           </div>
           <div class="col text-left">
-            <h6 class="font-italic">{{product.offerPrice}}</h6>
+            <h6 class="font-italic"> &#8377; {{product.offerPrice}}</h6>
           </div>
         </div>
+        <div class="row" *ngIf="product.extra">
+            <div class="col text-right">
+              <h6 class="font-italic"><strong>Todays Offer:</strong></h6>
+            </div>
+            <div class="col text-left">
+              <h6 class="font-italic"> Extra &#8377; {{product.offerPrice}} off</h6>
+            </div>
+          </div>
+
         <div class="row">
           <div class="col text-right">
             <h6 class="font-italic"><strong>Discount:</strong></h6>

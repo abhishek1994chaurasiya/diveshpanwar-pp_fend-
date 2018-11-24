@@ -62,7 +62,8 @@ export class SingleProductComponent implements OnInit {
       offerPrice: null,
       discount: null,
       extra: null,
-      imgUrl: null
+      imgUrl: null,
+      maxQty: null
     });
 
     this.error = false;

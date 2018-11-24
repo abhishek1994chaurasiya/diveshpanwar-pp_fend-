@@ -2,6 +2,7 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { WishlistService } from '../services/wishlist.service';
 import { MatDialog } from '@angular/material';
 import { AlertComponent } from '../alert/alert.component';
+import { CartService } from '../services/cart.service';
 
 @Component({
   selector: 'app-wishlist',
@@ -11,6 +12,7 @@ import { AlertComponent } from '../alert/alert.component';
 export class WishlistComponent implements OnInit {
   constructor(
     private wishlistService: WishlistService,
+    private cartService: CartService,
     private dialog: MatDialog,
     private cdRef: ChangeDetectorRef
   ) {}
@@ -38,7 +40,48 @@ export class WishlistComponent implements OnInit {
     );
   }
 
-  addToCart() {}
+  addToCart(product) {
+    console.log(product);
+    this.wishlistService.addToCart(product).subscribe(
+      res => {
+        console.log(res);
+        const dialogRef = this.dialog.open(AlertComponent, {
+          width: '90%',
+          data: {
+            type: 'success',
+            message: `Product added to Cart`
+          }
+        });
+
+        this.cartService.getCartItems(this.userId).subscribe(
+          response  => {
+            window.localStorage.cart = JSON.stringify(response.json());
+          },
+          err => {
+            console.log(err);
+          }
+        );
+
+        dialogRef.afterClosed().subscribe(result => {
+          console.log('The dialog was closed');
+        });
+      },
+      err => {
+        console.log(err.json());
+        const dialogRef = this.dialog.open(AlertComponent, {
+          width: '90%',
+          data: {
+            type: err.json() ? 'info' : 'danger',
+            message: err.json() ? err.json().message : `Something went wrong`
+          }
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+          console.log('The dialog was closed');
+        });
+      }
+    );
+  }
 
   removeFromWishList(wishlistId) {
     this.wishlistService.removeFromWishList(wishlistId).subscribe(
@@ -50,7 +93,6 @@ export class WishlistComponent implements OnInit {
             type: 'success',
             message: `Product Successfully Removed`
           }
-
         });
         dialogRef.afterClosed().subscribe(result => {
           console.log('The dialog was closed');

@@ -10,7 +10,6 @@ export class WishlistService {
 
   addToWishlist(wishlist) {
     console.log(wishlist);
-
     return this.http.post('http://localhost:3000/addToWishlist', wishlist);
   }
 
@@ -21,4 +20,9 @@ export class WishlistService {
   removeFromWishList(wishlistId) {
     return this.http.post('http://localhost:3000/removeFromWishList', {wishlistId: wishlistId});
   }
+
+  addToCart(product) {
+    return this.http.post('http://localhost:3000/addFromWishlist', product);
+  }
+
 }

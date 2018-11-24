@@ -20,4 +20,12 @@ export class CartService {
   addOneProduct(productToAdd) {
     return this.http.post('http://localhost:3000/addOneProduct', productToAdd);
   }
+
+  toggleQuantity(product) {
+    return this.http.post('http://localhost:3000/toggleQuantity', product);
+  }
+
+  removeCartItem(cartId) {
+    return this.http.post('http://localhost:3000/removeCartItem', {cartId: cartId});
+  }
 }
