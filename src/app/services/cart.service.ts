@@ -16,4 +16,8 @@ export class CartService {
   getCartItems(userId) {
     return this.http.post('http://localhost:3000/getCartItems', {userId: userId});
   }
+
+  addOneProduct(productToAdd) {
+    return this.http.post('http://localhost:3000/addOneProduct', productToAdd);
+  }
 }

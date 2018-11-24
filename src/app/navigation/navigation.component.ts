@@ -58,6 +58,7 @@ export class NavigationComponent implements OnInit {
         res => {
           console.log(res.json());
           this.requestSent = true;
+          window.localStorage.cart = JSON.stringify(res.json());
         },
         err => {
           console.log(err);
@@ -72,6 +73,9 @@ export class NavigationComponent implements OnInit {
 
   logout() {
     window.sessionStorage.clear();
+    this.userId = null;
+    this.userLoggedIn = null;
+    this.requestSent = false;
     this.router.navigate(['/login']);
   }
 

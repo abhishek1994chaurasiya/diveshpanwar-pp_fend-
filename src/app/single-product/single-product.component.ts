@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material';
 import { AlertComponent } from '../alert/alert.component';
+import { CartService } from '../services/cart.service';
 
 @Component({
   selector: 'app-single-product',
@@ -16,17 +17,25 @@ export class SingleProductComponent implements OnInit {
   cartForm: FormGroup;
   maxQty = [];
   userId = null;
+  userLoggedIn = null;
+
   constructor(
     private productService: ProductService,
     private cdRef: ChangeDetectorRef,
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private cartService: CartService
   ) {}
 
   ngOnInit() {
-
     this.userId = window.sessionStorage.getItem('user_id');
+    const status = window.sessionStorage.getItem('loggedIn');
+    if (status === 'true') {
+      this.userLoggedIn = true;
+    } else {
+      this.userLoggedIn = false;
+    }
     let productId = null;
     this.maxQty = [];
     this.cartForm = this.formBuilder.group({
@@ -51,10 +60,10 @@ export class SingleProductComponent implements OnInit {
           this.maxQty = [];
           this.product = res.json();
           this.cartForm.patchValue(this.product);
-          if(this.userId) {
+          if (this.userId) {
             this.cartForm.patchValue({
               userId: this.userId
-            })
+            });
           }
           for (let i = 0; i < this.product.maxQty; i++) {
             this.maxQty.push(String(i + 1));
@@ -73,6 +82,7 @@ export class SingleProductComponent implements OnInit {
 
   addToCart() {
     let productFound = false;
+    let productToAdd: any;
     if (window.localStorage.cart) {
       let productArray = [];
       let cart = JSON.parse(window.localStorage.cart);
@@ -102,6 +112,7 @@ export class SingleProductComponent implements OnInit {
             elem.productQuantity =
               Number(elem.productQuantity) +
               Number(this.cartForm.get('productQuantity').value);
+            productToAdd = elem;
           }
         }
         productArray.push(elem);
@@ -109,12 +120,24 @@ export class SingleProductComponent implements OnInit {
 
       if (!productFound) {
         productArray.push(this.cartForm.value);
+        productToAdd = this.cartForm.value;
       }
       window.localStorage.cart = JSON.stringify(productArray);
     } else {
       let productArray = [];
       productArray.push(this.cartForm.value);
       window.localStorage.cart = JSON.stringify(productArray);
+    }
+
+    if (this.userLoggedIn && productToAdd) {
+      this.cartService.addOneProduct(productToAdd).subscribe(
+        res => {
+          console.log(res);
+        },
+        err => {
+          console.log(err);
+        }
+      );
     }
   }
 }
