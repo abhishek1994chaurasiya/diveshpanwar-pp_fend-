@@ -123,6 +123,18 @@ export class SingleProductComponent implements OnInit {
         productToAdd = this.cartForm.value;
       }
       window.localStorage.cart = JSON.stringify(productArray);
+      // const dialogRef = this.dialog.open(AlertComponent, {
+      //   width: '50%',
+      //   data: {
+      //     type: 'success',
+      //     message: `Product added to cart.`
+      //   }
+      // });
+
+      // dialogRef.afterClosed().subscribe(result => {
+      //   console.log('The dialog was closed');
+      // });
+
     } else {
       let productArray = [];
       productArray.push(this.cartForm.value);
