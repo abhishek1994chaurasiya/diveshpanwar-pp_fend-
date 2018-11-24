@@ -2,7 +2,7 @@
 <hr class="special-hr">
 <div>
     <div class="row mt-3" *ngIf="data.products && data.products.length > 0">
-        <div class="col col-6 col-md col-md-3 mt-2" *ngFor="let product of data.products">
+        <div class="col col-6 col-md col-md-3 mt-2 ml-auto mr-auto" *ngFor="let product of data.products">
           <a [routerLink]="['/product', product._id]" routerLinkActive="router-link-active"  (click)="onNoClick()">
               <div class="card box-shadows">
                   <img class="card-img-top image-styling mt-1 img-fluid mx-auto d-block" src="{{product.imgUrl}}" alt="{{product.displayName}}">

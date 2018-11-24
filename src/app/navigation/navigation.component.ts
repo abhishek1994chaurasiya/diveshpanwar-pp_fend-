@@ -94,6 +94,7 @@ export class NavigationComponent implements OnInit {
 
           this.dialogRef.afterClosed().subscribe(result => {
             console.log('The dialog was closed');
+            this.searchForm.reset();
           });
         },
         err => {
