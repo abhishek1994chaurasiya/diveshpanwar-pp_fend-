@@ -1,6 +1,36 @@
 <div class="container-fluid">
   <h4 class="special-font text-center mt-3">Orders</h4>
   <hr class="special-hr">
+  <div class="col col-md-6 ml-auto mr-auto">
+    <form [formGroup]="filterForm" (ngSubmit)="filterProducts()">
+      <div class="form-group form-row">
+        <div class="col-2 text-right mt-1 font-weight-bold font-italic">
+          Filter:
+        </div>
+        <div class="col text-left">
+          <select name="productQuantity" id="productQuantity" formControlName="filter" class="form-control col" style="height: 2rem; font-size: 0.8rem;">
+            <option value=''>All</option>
+            <option value='open'>Open</option>
+            <option value='cancelled'>Cancelled</option>
+            <option value='closed'>Closed</option>
+            <option value='returned'>Returned</option>
+            <option value='dispatched'>Dispatched</option>
+            <option value='in-transit'>In Transit</option>
+          </select>
+        </div>
+        <div class="col-2">
+          <input type="submit" value="Filter" class="btn btn-sm btn-outline-warning text-dark special-font font-weight-bold">
+        </div>
+
+      </div>
+      <div class="form-group text-center ">
+      </div>
+
+    </form>
+  </div>
+
+  <h4 class="special-font text-center mt-3">Orders</h4>
+  <hr class="special-hr">
   <div class="table-responsive col-10 ml-auto mr-auto" *ngIf="orders && orders.length != 0">
     <table class="table table-sm table-striped">
       <thead>
@@ -14,19 +44,19 @@
       </thead>
       <tbody>
         <tr *ngFor="let order of orders">
-          <td class="special-font text-info">{{order._id}}</td>
+          <td class="special-font text-info pointer" (click)="getOrderDetail(order._id)">{{order._id}}</td>
           <td>{{order.orderStatus | titlecase}}</td>
           <td>{{order.orderDate | date: 'fullDate'}}</td>
           <td>&#8377; {{order.grandTotal}}</td>
           <td class="text-center">
             <div class="text-center" *ngIf="order.orderStatus  == 'open'">
-                <button class="btn btn-outline-dark special-font btn-sm font-weight-bold" (click)="changeOrderStatus(order)">Cancel</button>
+              <button class="btn btn-outline-dark special-font btn-sm font-weight-bold" (click)="changeOrderStatus(order)">Cancel</button>
             </div>
             <div class="text-center" *ngIf="order.orderStatus  == 'delivered'">
-                <button class="btn btn-outline-danger special-font btn-sm font-weight-bold" (click)="changeOrderStatus(order)">Return</button>
+              <button class="btn btn-outline-danger special-font btn-sm font-weight-bold" (click)="changeOrderStatus(order)">Return</button>
             </div>
             <div class="text-center" *ngIf="order.orderStatus  !== 'open' && order.orderStatus  !== 'delivered' ">
-                <h6 class="text-center text-dark special-font">{{order.orderStatus}}</h6>
+              <h6 class="text-center text-dark special-font">{{order.orderStatus}}</h6>
             </div>
           </td>
         </tr>

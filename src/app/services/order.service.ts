@@ -13,6 +13,10 @@ export class OrderService {
     });
   }
 
+  filterOrder(filterData) {
+    return this.http.post('http://localhost:3000/filterOrder', filterData);
+  }
+
   updateOrder(order) {
     console.log(order);
     return this.http.post('http://localhost:3000/updateOrder', order);

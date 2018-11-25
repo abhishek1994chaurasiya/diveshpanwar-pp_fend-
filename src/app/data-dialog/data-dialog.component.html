@@ -1,20 +1,50 @@
 <h4 class="special-font text-center">Order Details</h4>
 <hr class="special-hr">
 <div>
-    <div class="row mt-3" *ngIf="data.order">
-        <div class="col col-10 col-md-8 mt-2 ml-auto mr-auto">
-              <div class="card box-shadows">
-                  <div class="card-body">
-                    <h5 class="card-title text-center font-weight-bold special-font">{{data.order._id}}</h5>
-                    <h6 class="card-title text-center font-italic">Placed on: {{data.order.orderDate | date: 'fullDate'}}</h6>
-                    <h6 class="card-title text-center font-italic">Amount Paid: &#8377; {{data.order.grandTotal}}</h6>
-                    <h6 class="card-title text-center font-italic">Order Status: {{data.order.orderStatus}}</h6>
-                  </div>
-                </div>
+  <div class="row mt-3" *ngIf="data.order">
+    <div class="col col-10 col-md-8 mt-2 ml-auto mr-auto">
+      <div class="card box-shadows">
+        <div class="card-body">
+          <h5 class="card-title text-center font-weight-bold special-font">{{data.order._id}}</h5>
+          <h6 class="card-title text-center font-italic">Placed on: {{data.order.orderDate | date: 'fullDate'}}</h6>
+          <h6 class="card-title text-center font-italic">Amount Paid: &#8377; {{data.order.grandTotal}}</h6>
+          <h6 class="card-title text-center font-italic">Order Status: {{data.order.orderStatus}}</h6>
         </div>
       </div>
-      <div class="mt-3" *ngIf="!data.order">
-          <h5 class="text-center text-danger special-font">Something went wrong please try after some time.</h5>
-      </div>
+    </div>
+    <div class="col-12 mt-3">
+        <h5 class="special-font text-center mt-3">Products</h5>
+    </div>
+    <hr class="special-hr">
+    <div class="table-responsive col-10 ml-auto mr-auto" *ngIf="data.order.products && data.order.products.length != 0">
+      <table class="table table-sm table-striped">
+        <thead>
+          <tr class="special-font">
+            <th scope="col">Product Name</th>
+            <th scope="col">Price per Item</th>
+            <th scope="col">Discount</th>
+            <th scope="col">Quantity</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let product of data.order.products">
+            <td class="special-font">{{product.displayName}}</td>
+            <td><del class="text-danger"> &#8377; {{product.price}}</del> &#8377;{{product.offerPrice}}</td>
+            <td>{{product.discount}}% <span *ngIf="product.extra"> (Extra &#8377; {{product.extra}} off)</span></td>
+            <td class="text-center">
+              <div class="form-row">
+                <div class="col">
+                </div>
+                <div class="col"><span style="font-size: 1.5rem" class="special-font">{{product.productQuantity}}</span></div>
+                <div class="col">
+                </div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+  </div>
+  <div class="mt-3" *ngIf="!data.order">
+    <h5 class="text-center text-danger special-font">Something went wrong please try after some time.</h5>
+  </div>
 </div>
-

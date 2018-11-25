@@ -141,8 +141,8 @@ export class SingleProductComponent implements OnInit {
           this.feedbacks = res.json();
           console.log(this.feedbacks);
           let count = this.feedbacks.length;
-          this.reviewCount = count;
           this.userRating = 0;
+          this.reviewCount = count;
           if (count === 0) {
             this.userRating = 0;
           } else {
