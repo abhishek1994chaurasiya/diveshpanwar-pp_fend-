@@ -36,6 +36,18 @@ export class WishlistComponent implements OnInit {
       },
       err => {
         console.log(err.json());
+        const dialogRef = this.dialog.open(AlertComponent, {
+          width: '50%',
+          data: {
+            type: 'danger',
+            message: `Something went wrong. Please try again`
+          }
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+          console.log('The dialog was closed');
+        });
+
       }
     );
   }

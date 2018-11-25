@@ -1,6 +1,8 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ProductService } from '../services/product.service';
 import { Router } from '@angular/router';
+import { AlertComponent } from '../alert/alert.component';
+import { MatDialog } from '@angular/material';
 
 interface LangDesc {
   name: string;
@@ -16,7 +18,12 @@ export class HomeComponent implements OnInit {
   products: any;
   deals: any;
   error: any;
-  constructor(private productService: ProductService, private router: Router, private cdref: ChangeDetectorRef) {}
+  constructor(
+    private productService: ProductService,
+    private router: Router,
+    private cdref: ChangeDetectorRef,
+    private dialog: MatDialog
+  ) {}
 
   ngOnInit() {
     this.error = null;
@@ -29,6 +36,17 @@ export class HomeComponent implements OnInit {
       err => {
         // console.log(err.json());
         this.error = 'Something Wrong Happened. Please try again.';
+        const dialogRef = this.dialog.open(AlertComponent, {
+          width: '50%',
+          data: {
+            type: 'danger',
+            message: `Something went wrong. Please try again`
+          }
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+          console.log('The dialog was closed');
+        });
         this.cdref.detectChanges();
       }
     );
@@ -41,6 +59,18 @@ export class HomeComponent implements OnInit {
       err => {
         // console.log(err.json());
         this.error = 'Something Wrong Happened. Please try again.';
+        const dialogRef = this.dialog.open(AlertComponent, {
+          width: '50%',
+          data: {
+            type: 'danger',
+            message: `Something went wrong. Please try again`
+          }
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+          console.log('The dialog was closed');
+        });
+
         this.cdref.detectChanges();
       }
     );
