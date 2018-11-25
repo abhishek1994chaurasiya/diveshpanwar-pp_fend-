@@ -41,6 +41,17 @@ export class NotificationComponent implements OnInit {
         });
       }
     );
+
+    this.notificationService.getUnreadNotifications(this.userId).subscribe(
+      notifications => {
+        window.localStorage.notifications = JSON.stringify(
+          notifications.json()
+        );
+      },
+      err => {
+        console.log(err);
+      }
+    );
   }
 
   getOrderDetail(orderId) {
@@ -58,7 +69,6 @@ export class NotificationComponent implements OnInit {
         dialogRef.afterClosed().subscribe(result => {
           console.log('The dialog was closed');
         });
-
       },
       err => {
         console.log(err);

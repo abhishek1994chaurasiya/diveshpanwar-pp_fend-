@@ -10,6 +10,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { ProductService } from '../services/product.service';
 import { CartService } from '../services/cart.service';
+import { NotificationService } from '../services/notification.service';
 @Component({
   selector: 'app-navigation',
   templateUrl: './navigation.component.html',
@@ -24,13 +25,15 @@ export class NavigationComponent implements OnInit {
   products: any;
   userId = null;
   requestSent = false;
+  notificationCount = 0;
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
     public dialog: MatDialog,
     private cdRef: ChangeDetectorRef,
     private productService: ProductService,
-    private cartService: CartService
+    private cartService: CartService,
+    private notificationService: NotificationService
   ) {
     console.log(this.userLoggedIn);
   }
@@ -47,6 +50,11 @@ export class NavigationComponent implements OnInit {
       this.userLoggedIn = true;
     } else {
       this.userLoggedIn = false;
+    }
+    if (window.localStorage.notifications) {
+      const notifications = JSON.parse(window.localStorage.notifications);
+
+      this.notificationCount = notifications.length;
     }
     if (window.localStorage.cart) {
       let cart = JSON.parse(window.localStorage.cart);
@@ -65,8 +73,16 @@ export class NavigationComponent implements OnInit {
           this.requestSent = false;
         }
       );
+      this.notificationService.getUnreadNotifications(this.userId).subscribe(
+        notifications => {
+          window.localStorage.notifications = JSON.stringify(notifications.json());
+        }, err => {
+          console.log(err);
+        }
+      );
     } else {
       this.cartCount = 0;
+      this.notificationCount = 0;
     }
     this.cdRef.detectChanges();
   }
@@ -77,6 +93,7 @@ export class NavigationComponent implements OnInit {
     this.userLoggedIn = null;
     this.requestSent = false;
     window.localStorage.removeItem('cart');
+    window.localStorage.removeItem('notifications');
     this.router.navigate(['/login']);
   }
 

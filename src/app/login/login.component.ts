@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { CartService } from '../services/cart.service';
 import { MatDialog } from '@angular/material';
 import { AlertComponent } from '../alert/alert.component';
+import { NotificationService } from '../services/notification.service';
 
 @Component({
   selector: 'app-login',
@@ -23,6 +24,7 @@ export class LoginComponent implements OnInit {
     private cdref: ChangeDetectorRef,
     private router: Router,
     private cartService: CartService,
+    private notificationService: NotificationService,
     private dialog: MatDialog
   ) {}
 
@@ -46,6 +48,20 @@ export class LoginComponent implements OnInit {
           window.sessionStorage.setItem('username', res.username);
           window.sessionStorage.setItem('loggedIn', 'true');
           console.log(this.userId);
+
+          this.notificationService
+            .getUnreadNotifications(this.userId)
+            .subscribe(
+              notifications => {
+                window.localStorage.notifications = JSON.stringify(
+                  notifications.json()
+                );
+              },
+              err => {
+                console.log(err);
+              }
+            );
+
           if (window.localStorage.cart) {
             let cartArray = [];
             const cart = JSON.parse(window.localStorage.cart);

@@ -30,6 +30,13 @@ export class OrderComponent implements OnInit {
       filter: ''
     });
     this.userId = window.sessionStorage.getItem('user_id');
+    this.notificationService.getUnreadNotifications(this.userId).subscribe(
+      notifications => {
+        window.localStorage.notifications = JSON.stringify(notifications.json());
+      }, err => {
+        console.log(err);
+      }
+    );
     this.orderService.getOrders(this.userId).subscribe(
       res => {
         this.orders = res.json();

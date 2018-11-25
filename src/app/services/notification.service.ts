@@ -19,4 +19,8 @@ export class NotificationService {
   getOrderDetail(orderId) {
     return this.http.post('http://localhost:3000/getOrderDetail', {orderId: orderId});
   }
+
+  getUnreadNotifications(userId) {
+    return this.http.post('http://localhost:3000/getUnreadNotifications', {userId: userId});
+  }
 }

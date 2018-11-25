@@ -13,14 +13,19 @@
     <button mat-button routerLink="/wishlist" class="bigger-fonts special-font" *ngIf="userLoggedIn">Wishlist</button>
 
     <button mat-button routerLink="/orders" class="bigger-fonts special-font" *ngIf="userLoggedIn">Orders</button>
-    <button mat-button routerLink="/notifications" class="bigger-fonts special-font" *ngIf="userLoggedIn">Notifications</button>
 
     <button mat-button (click)="logout()" class="bigger-fonts special-font" *ngIf="userLoggedIn">Logout</button>
+    <button mat-button routerLink="/notifications" class="bigger-fonts special-font" *ngIf="userLoggedIn">
+      <mat-icon *ngIf="notificationCount == 0">notifications_none</mat-icon>
+      <mat-icon *ngIf="notificationCount > 0">notifications_active
+      </mat-icon>
+      <span class="badge badge-pill badge-light" *ngIf="notificationCount > 0">{{notificationCount}}</span>
+    </button>
     <button mat-button class="bigger-fonts special-font" routerLink="/cart">
       <i class="material-icons">
         shopping_cart
       </i>
-      <span class="badge badge-pill badge-dark">{{cartCount}}</span>
+      <span class="badge badge-pill badge-light">{{cartCount}}</span>
     </button>
   </div>
   <button mat-button [mat-menu-trigger-for]="menu" fxHide="false" fxHide.gt-sm>
@@ -35,7 +40,12 @@
   <button mat-menu-item routerLink="/wishlist" *ngIf="userLoggedIn">Wishlist</button>
   <button mat-menu-item routerLink="/orders" *ngIf="userLoggedIn">Orders</button>
   <button mat-menu-item (click)="logout()" *ngIf="userLoggedIn">Logout</button>
-  <button mat-menu-item routerLink="/notifications" *ngIf="userLoggedIn">Notifications</button>
+  <button mat-menu-item routerLink="/notifications" *ngIf="userLoggedIn">
+    <mat-icon *ngIf="notificationCount == 0">notifications_none</mat-icon>
+    <mat-icon *ngIf="notificationCount > 0">notifications_active
+    </mat-icon>
+    <span class="badge badge-pill badge-dark" *ngIf="notificationCount > 0">{{notificationCount}}</span>
+  </button>
   <button mat-menu-item routerLink="/cart">
     <i class="material-icons">
       shopping_cart

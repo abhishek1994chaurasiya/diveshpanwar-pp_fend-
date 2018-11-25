@@ -8,6 +8,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import * as $ from 'jquery';
 import { CheckoutService } from '../services/checkout.service';
 import { Router } from '@angular/router';
+import { NotificationService } from '../services/notification.service';
 
 @Component({
   selector: 'app-checkout',
@@ -33,7 +34,8 @@ export class CheckoutComponent implements OnInit {
     private profileService: ProfileService,
     private formBuilder: FormBuilder,
     private checkoutService: CheckoutService,
-    private router: Router
+    private router: Router,
+    private notificationService: NotificationService
   ) {}
 
   ngOnInit() {
@@ -164,6 +166,12 @@ export class CheckoutComponent implements OnInit {
           console.log('The dialog was closed');
           this.router.navigate(['/orders']);
           window.localStorage.removeItem('cart');
+          this.notificationService.getUnreadNotifications(this.userId).subscribe(
+            notifications => {
+              window.localStorage.notifications = JSON.stringify(notifications.json());
+            }, err => {
+              console.log(err);
+            });
         });
 
       }, err => {
