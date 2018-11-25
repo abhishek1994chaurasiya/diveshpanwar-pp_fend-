@@ -46,7 +46,8 @@ export class CheckoutComponent implements OnInit {
       cardId: [null, Validators.required, null],
       grandTotal: [null, Validators.required, null],
       orderDate: [null, Validators.required, null],
-      orderStatus: ['open', Validators.required, null]
+      orderStatus: ['open', Validators.required, null],
+      products: [null, Validators.required, null]
     });
     this.userId = window.sessionStorage.getItem('user_id');
     const status = window.sessionStorage.getItem('loggedIn');
@@ -66,11 +67,15 @@ export class CheckoutComponent implements OnInit {
             let price = Number(element.offerPrice);
             let extra = element.extra ? Number(element.extra) : 0;
             this.total = this.total + (qty * price - extra);
+            if(this.total >  1000) {
+              this.deliveryCharges = 0;
+            }
             this.grandTotal = this.total + this.deliveryCharges;
             this.checkoutForm.patchValue({
               userId: this.userId,
               grandTotal: this.grandTotal,
-              orderDate: new Date()
+              orderDate: new Date(),
+              products: this.products
             });
           });
         }

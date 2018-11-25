@@ -7,6 +7,7 @@ import { AlertComponent } from '../alert/alert.component';
 import { CartService } from '../services/cart.service';
 import { WishlistService } from '../services/wishlist.service';
 import { FeedbackService } from '../services/feedback.service';
+import { NullTemplateVisitor } from '@angular/compiler';
 
 @Component({
   selector: 'app-single-product',
@@ -29,6 +30,8 @@ export class SingleProductComponent implements OnInit {
   username = null;
   userBroughtProduct = 0;
   userGivenfeedback = 0;
+  userRating = 0;
+  reviewCount = 0;
   constructor(
     private productService: ProductService,
     private cdRef: ChangeDetectorRef,
@@ -61,7 +64,8 @@ export class SingleProductComponent implements OnInit {
       discount: null,
       maxQty: null,
       extra: null,
-      imgUrl: null
+      imgUrl: NullTemplateVisitor,
+      category: null
     });
 
     this.wishListForm = this.formBuilder.group({
@@ -74,7 +78,8 @@ export class SingleProductComponent implements OnInit {
       discount: null,
       extra: null,
       imgUrl: null,
-      maxQty: null
+      maxQty: null,
+      category: null
     });
 
     this.feedbackForm = this.formBuilder.group({
@@ -135,6 +140,19 @@ export class SingleProductComponent implements OnInit {
         res => {
           this.feedbacks = res.json();
           console.log(this.feedbacks);
+          let count = this.feedbacks.length;
+          this.reviewCount = count;
+          this.userRating = 0;
+          if (count === 0) {
+            this.userRating = 0;
+          } else {
+            this.feedbacks.forEach(feed => {
+              this.userRating = Number(this.userRating) + Number(feed.rating);
+            });
+            console.log(this.userRating);
+
+            this.userRating = Math.floor(this.userRating / count);
+          }
         },
         err => {
           console.log(err.json());

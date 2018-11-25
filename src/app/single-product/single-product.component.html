@@ -47,7 +47,11 @@
             <h6 class="font-italic text-info"><strong>Ratings:</strong></h6>
           </div>
           <div class="col text-left">
-            <h6 class="font-italic text-info">{{product.avgRating}}</h6>
+            <h6>
+              <span *ngFor="let rate of rater" class="pointer" [ngClass]="{'text-yellow': userRating >= rate, 'text-dark' : userRating < rate}">
+                &#9733;
+              </span>
+            </h6>
           </div>
         </div>
         <div class="row">
@@ -55,7 +59,7 @@
             <h6 class="font-italic text-info"><strong>Reviews:</strong></h6>
           </div>
           <div class="col text-left">
-            <h6 class="font-italic text-info">{{product.reviews}}</h6>
+            <h6 class="font-italic text-info">{{reviewCount}}</h6>
           </div>
         </div>
         <form [formGroup]="cartForm" (ngSubmit)="addToCart()">
@@ -82,7 +86,7 @@
       </div>
     </div>
   </div>
-  <div class="col-6 ml-auto mr-auto mt-6"  *ngIf="userLoggedIn && userBroughtProduct > 0 && userGivenfeedback == 0">
+  <div class="col-6 ml-auto mr-auto mt-6" *ngIf="userLoggedIn && userBroughtProduct > 0 && userGivenfeedback == 0">
     <h5 class="text-center text-info special-font">Give Feedback</h5>
     <div class="card box-shadows">
       <div class="card-body">
@@ -113,8 +117,8 @@
     </div>
   </div>
   <div class="col-6 ml-auto mr-auto mt-6" *ngIf="feedbacks && feedbacks.length > 0">
-      <h4 class="text-center font-weight-bold special-font mt-3 mb-3">Feedbacks</h4>
-      <hr class="special-hr">
+    <h4 class="text-center font-weight-bold special-font mt-3 mb-3">Feedbacks</h4>
+    <hr class="special-hr">
     <mat-expansion-panel *ngFor="let feedback of feedbacks" class="mt-2 mb-2">
       <mat-expansion-panel-header>
         <mat-panel-title class="special-font font-weight-bold">
@@ -122,6 +126,9 @@
         </mat-panel-title>
         <mat-panel-description class="text-right" style="display: inline-block">
           <strong>Rating: </strong>{{feedback.rating}}/5
+          <span *ngFor="let rate of rater" class="pointer" [ngClass]="{'text-yellow': feedback.rating >= rate, 'text-dark' : feedback.rating < rate}">
+            &#9733;
+          </span>
         </mat-panel-description>
       </mat-expansion-panel-header>
       <p>{{feedback.message}}</p>
@@ -129,4 +136,5 @@
   </div>
 </div>
 
-<h5 class="mt-3 mb-6 special-font text-center text-info" *ngIf="feedbacks && feedbacks.length == 0">No feedbacks available for this product.</h5>
+<h5 class="mt-3 mb-6 special-font text-center text-info" *ngIf="feedbacks && feedbacks.length == 0">No feedbacks
+  available for this product.</h5>
