@@ -49,6 +49,14 @@
             <hr class="special-hr">
             <h6 class="text-center text-dark">{{address.contact}}</h6>
             <p class="text-center text-dark font-weight-bold font-italic">{{address.address}}</p>
+            <div class="form-group form-row">
+                <div class="col text-right">
+                  <mat-icon class="text-warning pointer" (click)="editAddress(address._id)">edit</mat-icon>
+                </div>
+                <div class="col text-left">
+                  <mat-icon class="text-danger pointer" (click)="deleteAddress(address._id)">delete_forever</mat-icon>
+                </div>
+              </div>
           </div>
         </div>
       </div>
@@ -72,6 +80,15 @@
             <hr class="special-hr">
             <h6 class="text-center text-dark">{{card.cardNumber}}</h6>
             <h6 class="text-center text-dark">{{card.expiry}}</h6>
+            <div class="form-group form-row">
+                <div class="col text-right">
+                  <mat-icon class="text-warning pointer" (click)="editCard(card._id)">edit</mat-icon>
+                </div>
+                <div class="col text-left">
+                  <mat-icon class="text-danger pointer" (click)="deleteCard(card._id)">delete_forever</mat-icon>
+                </div>
+              </div>
+
           </div>
         </div>
       </div>

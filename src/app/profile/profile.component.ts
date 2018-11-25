@@ -171,6 +171,10 @@ export class ProfileComponent implements OnInit {
     }
   }
 
+  showProduct(productId) {
+    this.router.navigate(['/product', productId]);
+  }
+
   editAddress(addressId) {
     this.router.navigate(['/editAddress', addressId]);
   }
@@ -179,9 +183,6 @@ export class ProfileComponent implements OnInit {
     this.router.navigate(['/editCard', cardId]);
   }
 
-  showProduct(productId) {
-    this.router.navigate(['/product', productId]);
-  }
 
   deleteAddress(addressId) {
     this.addressService.deleteAddress(addressId).subscribe(

@@ -9,6 +9,8 @@ import * as $ from 'jquery';
 import { CheckoutService } from '../services/checkout.service';
 import { Router } from '@angular/router';
 import { NotificationService } from '../services/notification.service';
+import { AddressService } from '../services/address.service';
+import { CardService } from '../services/card.service';
 
 @Component({
   selector: 'app-checkout',
@@ -35,7 +37,9 @@ export class CheckoutComponent implements OnInit {
     private formBuilder: FormBuilder,
     private checkoutService: CheckoutService,
     private router: Router,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private addressService: AddressService,
+    private cardService: CardService
   ) {}
 
   ngOnInit() {
@@ -69,7 +73,7 @@ export class CheckoutComponent implements OnInit {
             let price = Number(element.offerPrice);
             let extra = element.extra ? Number(element.extra) : 0;
             this.total = this.total + (qty * price - extra);
-            if(this.total >  1000) {
+            if (this.total > 1000) {
               this.deliveryCharges = 0;
             }
             this.grandTotal = this.total + this.deliveryCharges;
@@ -166,15 +170,103 @@ export class CheckoutComponent implements OnInit {
           console.log('The dialog was closed');
           this.router.navigate(['/orders']);
           window.localStorage.removeItem('cart');
-          this.notificationService.getUnreadNotifications(this.userId).subscribe(
-            notifications => {
-              window.localStorage.notifications = JSON.stringify(notifications.json());
-            }, err => {
-              console.log(err);
-            });
+          this.notificationService
+            .getUnreadNotifications(this.userId)
+            .subscribe(
+              notifications => {
+                window.localStorage.notifications = JSON.stringify(
+                  notifications.json()
+                );
+              },
+              err => {
+                console.log(err);
+              }
+            );
+        });
+      },
+      err => {
+        console.log(err);
+        const dialogRef = this.dialog.open(AlertComponent, {
+          width: '50%',
+          data: {
+            type: 'danger',
+            message: `Something went wrong. Please try again`
+          }
         });
 
-      }, err => {
+        dialogRef.afterClosed().subscribe(result => {
+          console.log('The dialog was closed');
+        });
+      }
+    );
+  }
+
+  editAddress(addressId) {
+    this.router.navigate(['/editAddress', addressId]);
+  }
+
+  editCard(cardId) {
+    this.router.navigate(['/editCard', cardId]);
+  }
+
+  deleteAddress(addressId) {
+    this.addressService.deleteAddress(addressId).subscribe(
+      res => {
+        console.log(res.json());
+        const dialogRef = this.dialog.open(AlertComponent, {
+          width: '50%',
+          data: {
+            type: 'success',
+            message: `Address Successfully Deleted`
+          }
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+          console.log('The dialog was closed');
+          this.checkoutForm.patchValue({
+            addressId: null
+          });
+          this.ngOnInit();
+        });
+      },
+      err => {
+        console.log(err);
+        const dialogRef = this.dialog.open(AlertComponent, {
+          width: '50%',
+          data: {
+            type: 'danger',
+            message: `Something went wrong. Please try again`
+          }
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+          console.log('The dialog was closed');
+        });
+      }
+    );
+  }
+
+  deleteCard(cardId) {
+    this.cardService.deleteCard(cardId).subscribe(
+      res => {
+        console.log(res.json());
+        const dialogRef = this.dialog.open(AlertComponent, {
+          width: '50%',
+          data: {
+            type: 'success',
+            message: `Address Successfully Deleted`
+          }
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+          console.log('The dialog was closed');
+          this.checkoutForm.patchValue({
+            cardId: null
+          });
+          this.ngOnInit();
+        });
+      },
+      err => {
         console.log(err);
         const dialogRef = this.dialog.open(AlertComponent, {
           width: '50%',
