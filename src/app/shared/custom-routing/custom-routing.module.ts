@@ -16,6 +16,7 @@ import { ProfileComponent } from 'src/app/profile/profile.component';
 import { WishlistComponent } from 'src/app/wishlist/wishlist.component';
 import { CheckoutComponent } from 'src/app/checkout/checkout.component';
 import { OrderComponent } from 'src/app/order/order.component';
+import { NotificationComponent } from 'src/app/notification/notification.component';
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -30,6 +31,7 @@ const appRoutes: Routes = [
   { path: 'wishlist', component: WishlistComponent, canActivate: [AuthGuard]  },
   { path: 'checkout', component: CheckoutComponent, canActivate: [AuthGuard]  },
   { path: 'orders', component: OrderComponent, canActivate: [AuthGuard]  },
+  { path: 'notifications', component: NotificationComponent, canActivate: [AuthGuard]  },
   { path: 'editAddress/:addressId', component: EditAddressComponent, canActivate: [AuthGuard]  },
   { path: 'editCard/:cardId', component: EditCardComponent, canActivate: [AuthGuard]  },
   { path: '**', component: ErrorComponent }

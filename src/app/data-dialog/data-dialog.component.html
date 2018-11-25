@@ -1,0 +1,20 @@
+<h4 class="special-font text-center">Order Details</h4>
+<hr class="special-hr">
+<div>
+    <div class="row mt-3" *ngIf="data.order">
+        <div class="col col-10 col-md-8 mt-2 ml-auto mr-auto">
+              <div class="card box-shadows">
+                  <div class="card-body">
+                    <h5 class="card-title text-center font-weight-bold special-font">{{data.order._id}}</h5>
+                    <h6 class="card-title text-center font-italic">Placed on: {{data.order.orderDate | date: 'fullDate'}}</h6>
+                    <h6 class="card-title text-center font-italic">Amount Paid: &#8377; {{data.order.grandTotal}}</h6>
+                    <h6 class="card-title text-center font-italic">Order Status: {{data.order.orderStatus}}</h6>
+                  </div>
+                </div>
+        </div>
+      </div>
+      <div class="mt-3" *ngIf="!data.order">
+          <h5 class="text-center text-danger special-font">Something went wrong please try after some time.</h5>
+      </div>
+</div>
+

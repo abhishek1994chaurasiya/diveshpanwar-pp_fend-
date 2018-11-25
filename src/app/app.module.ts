@@ -37,6 +37,9 @@ import { CheckoutComponent } from './checkout/checkout.component';
 import { CheckoutService } from './services/checkout.service';
 import { OrderComponent } from './order/order.component';
 import { OrderService } from './services/order.service';
+import { NotificationService } from './services/notification.service';
+import { NotificationComponent } from './notification/notification.component';
+import { DataDialogComponent } from './data-dialog/data-dialog.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -58,7 +61,9 @@ import { OrderService } from './services/order.service';
     ProfileComponent,
     WishlistComponent,
     CheckoutComponent,
-    OrderComponent
+    OrderComponent,
+    NotificationComponent,
+    DataDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -81,12 +86,14 @@ import { OrderService } from './services/order.service';
     CartService,
     WishlistService,
     CheckoutService,
-    OrderService
+    OrderService,
+    NotificationService
   ],
   entryComponents: [
     MessageSentDialogComponent,
     SearchResultDialogComponent,
     AlertComponent,
+    DataDialogComponent
   ],
   bootstrap: [AppComponent]
 })

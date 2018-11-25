@@ -10,9 +10,10 @@
     <button mat-button routerLink="/login" class="bigger-fonts special-font" *ngIf="!userLoggedIn">Login</button>
     <button mat-button routerLink="/signup" class="bigger-fonts special-font" *ngIf="!userLoggedIn">Signup</button>
     <button mat-button routerLink="/profile" class="bigger-fonts special-font" *ngIf="userLoggedIn">Profile</button>
-    <button mat-button routerLink="/wishlist" class="bigger-fonts special-font">Wishlist</button>
+    <button mat-button routerLink="/wishlist" class="bigger-fonts special-font" *ngIf="userLoggedIn">Wishlist</button>
 
-    <button mat-button routerLink="/orders" class="bigger-fonts special-font">Orders</button>
+    <button mat-button routerLink="/orders" class="bigger-fonts special-font" *ngIf="userLoggedIn">Orders</button>
+    <button mat-button routerLink="/notifications" class="bigger-fonts special-font" *ngIf="userLoggedIn">Notifications</button>
 
     <button mat-button (click)="logout()" class="bigger-fonts special-font" *ngIf="userLoggedIn">Logout</button>
     <button mat-button class="bigger-fonts special-font" routerLink="/cart">
@@ -31,9 +32,10 @@
   <button mat-menu-item routerLink="/login" *ngIf="!userLoggedIn">Login</button>
   <button mat-menu-item routerLink="/signup" *ngIf="!userLoggedIn">Signup</button>
   <button mat-menu-item routerLink="/profile" *ngIf="userLoggedIn">Profile</button>
-  <button mat-menu-item routerLink="/wishlist">Wishlist</button>
-  <button mat-menu-item routerLink="/orders">Orders</button>
+  <button mat-menu-item routerLink="/wishlist" *ngIf="userLoggedIn">Wishlist</button>
+  <button mat-menu-item routerLink="/orders" *ngIf="userLoggedIn">Orders</button>
   <button mat-menu-item (click)="logout()" *ngIf="userLoggedIn">Logout</button>
+  <button mat-menu-item routerLink="/notifications" *ngIf="userLoggedIn">Notifications</button>
   <button mat-menu-item routerLink="/cart">
     <i class="material-icons">
       shopping_cart

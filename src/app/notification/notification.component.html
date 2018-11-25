@@ -1,0 +1,32 @@
+<div class="container-fluid">
+  <h4 class="special-font text-center mt-3">Notifications</h4>
+  <hr class="special-hr">
+  <div class="table-responsive col-10 ml-auto mr-auto" *ngIf="notifications && notifications.length != 0">
+    <table class="table table-sm table-striped">
+      <thead>
+        <tr class="special-font">
+          <th scope="col">Order Id</th>
+          <th scope="col">Message</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let notification of notifications">
+          <td class="special-font text-info pointer" (click)="getOrderDetail(notification.orderId)">{{notification.orderId}}</td>
+          <td>{{notification.message | titlecase}}</td>
+          <td class="text-center">
+            <div class="text-center" *ngIf="notification.status  == 'unread'">
+                <button class="btn btn-outline-dark special-font btn-sm font-weight-bold" (click)="changeNotificationStatus(notification)">Mark as Read</button>
+            </div>
+            <div class="text-center" *ngIf="notification.status  !== 'unread'">
+                <h6 class="text-center text-dark special-font">{{notification.status}}</h6>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col" *ngIf="notifications && notifications.length == 0">
+    <h5 class="text-center text-info special-font">No New Notifications</h5>
+  </div>
+</div>
