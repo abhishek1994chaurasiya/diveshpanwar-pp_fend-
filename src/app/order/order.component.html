@@ -1,0 +1,39 @@
+<div class="container-fluid">
+  <h4 class="special-font text-center mt-3">Orders</h4>
+  <hr class="special-hr">
+  <div class="table-responsive col-10 ml-auto mr-auto" *ngIf="orders && orders.length != 0">
+    <table class="table table-sm table-striped">
+      <thead>
+        <tr class="special-font">
+          <th scope="col">Order Id</th>
+          <th scope="col">Order Status</th>
+          <th scope="col">Order Date</th>
+          <th scope="col">Grand Total</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let order of orders">
+          <td class="special-font text-info">{{order._id}}</td>
+          <td>{{order.orderStatus | titlecase}}</td>
+          <td>{{order.orderDate | date: 'fullDate'}}</td>
+          <td>&#8377; {{order.grandTotal}}</td>
+          <td class="text-center">
+            <div class="text-center" *ngIf="order.orderStatus  == 'open'">
+                <button class="btn btn-outline-dark special-font btn-sm font-weight-bold" (click)="changeOrderStatus(order)">Cancel</button>
+            </div>
+            <div class="text-center" *ngIf="order.orderStatus  == 'delivered'">
+                <button class="btn btn-outline-danger special-font btn-sm font-weight-bold" (click)="changeOrderStatus(order)">Return</button>
+            </div>
+            <div class="text-center" *ngIf="order.orderStatus  !== 'open' && order.orderStatus  !== 'delivered' ">
+                <h6 class="text-center text-dark special-font">{{order.orderStatus}}</h6>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col" *ngIf="orders && orders.length == 0">
+    <h5 class="text-center text-info special-font">No Orders Available</h5>
+  </div>
+</div>

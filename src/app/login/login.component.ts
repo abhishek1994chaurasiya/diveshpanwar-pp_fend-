@@ -48,39 +48,40 @@ export class LoginComponent implements OnInit {
           if (window.localStorage.cart) {
             let cartArray = [];
             const cart = JSON.parse(window.localStorage.cart);
-            cart.forEach((element) => {
+            cart.forEach(element => {
               console.log(this.userId);
               element.userId = this.userId;
               cartArray.push(element);
             });
             console.log(cartArray);
+            if (cartArray.length > 0) {
+              this.cartService.addBulkCart(cartArray).subscribe(
+                res => {
+                  console.log(res.json());
+                  const dialogRef = this.dialog.open(AlertComponent, {
+                    width: '80%',
+                    data: {
+                      type: 'success',
+                      message: 'Products in cart added to account'
+                    }
+                  });
 
-            this.cartService.addBulkCart(cartArray).subscribe(
-              res => {
-                console.log(res.json());
-                const dialogRef = this.dialog.open(AlertComponent, {
-                  width: '80%',
-                  data: {
-                    type: 'success',
-                    message: 'Products in cart added to account'
-                  }
-                });
-
-                dialogRef.afterClosed().subscribe(result => {
-                  console.log('The dialog was closed');
-                  window.localStorage.removeItem('cart');
-                  this.router.navigate(['/cart']);
-
-                });
-              },
-              err => {
-                console.log(err);
-              }
-            );
+                  dialogRef.afterClosed().subscribe(result => {
+                    console.log('The dialog was closed');
+                    window.localStorage.removeItem('cart');
+                    this.router.navigate(['/cart']);
+                  });
+                },
+                err => {
+                  console.log(err);
+                }
+              );
+            } else {
+              this.router.navigate(['/profile']);
+            }
           } else {
             window.localStorage.removeItem('cart');
             this.router.navigate(['/cart']);
-
           }
         },
         err => {

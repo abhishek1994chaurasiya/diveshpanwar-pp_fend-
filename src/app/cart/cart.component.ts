@@ -2,6 +2,7 @@ import { Component, OnInit, ChangeDetectorRef, DoCheck } from '@angular/core';
 import { CartService } from '../services/cart.service';
 import { MatDialog } from '@angular/material';
 import { AlertComponent } from '../alert/alert.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
@@ -17,7 +18,8 @@ export class CartComponent implements OnInit {
   constructor(
     private cartService: CartService,
     private cdRef: ChangeDetectorRef,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -134,5 +136,9 @@ export class CartComponent implements OnInit {
       }
     );
     this.cdRef.detectChanges();
+  }
+
+  checkout() {
+    this.router.navigate(['/checkout']);
   }
 }

@@ -14,6 +14,8 @@ import { EditCardComponent } from 'src/app/edit-card/edit-card.component';
 import { EditAddressComponent } from 'src/app/edit-address/edit-address.component';
 import { ProfileComponent } from 'src/app/profile/profile.component';
 import { WishlistComponent } from 'src/app/wishlist/wishlist.component';
+import { CheckoutComponent } from 'src/app/checkout/checkout.component';
+import { OrderComponent } from 'src/app/order/order.component';
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -26,6 +28,8 @@ const appRoutes: Routes = [
   { path: 'addAddress', component: AddAddressComponent, canActivate: [AuthGuard]  },
   { path: 'addCard', component: AddCardComponent, canActivate: [AuthGuard]  },
   { path: 'wishlist', component: WishlistComponent, canActivate: [AuthGuard]  },
+  { path: 'checkout', component: CheckoutComponent, canActivate: [AuthGuard]  },
+  { path: 'orders', component: OrderComponent, canActivate: [AuthGuard]  },
   { path: 'editAddress/:addressId', component: EditAddressComponent, canActivate: [AuthGuard]  },
   { path: 'editCard/:cardId', component: EditCardComponent, canActivate: [AuthGuard]  },
   { path: '**', component: ErrorComponent }

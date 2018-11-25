@@ -1,0 +1,92 @@
+<div class="container-fluid mb-6 mt-3">
+  <h4 class="special-font text-center mt-3">Checkout</h4>
+  <hr class="special-hr">
+  <div class="table-responsive col-10 ml-auto mr-auto" *ngIf="products && products.length != 0">
+    <table class="table table-sm table-striped">
+      <thead>
+        <tr class="special-font">
+          <th scope="col">Product Name</th>
+          <th scope="col">Price per Item</th>
+          <th scope="col">Discount</th>
+          <th scope="col">Quantity</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of products">
+          <td class="special-font">{{product.displayName}}</td>
+          <td><del class="text-danger"> &#8377; {{product.price}}</del> &#8377;{{product.offerPrice}}</td>
+          <td>{{product.discount}}% <span *ngIf="product.extra">Extra &#8377; {{product.extra}} off</span></td>
+          <td class="text-center">
+            <div class="form-row">
+              <div class="col">
+              </div>
+              <div class="col"><span style="font-size: 1.5rem" class="special-font">{{product.productQuantity}}</span></div>
+              <div class="col">
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <hr class="special-hr">
+    <h5 class="text-center text-dark special-font">&#8377; {{total}} + &#8377; {{deliveryCharges}} (Delivery Charges)</h5>
+    <h5 class="text-center text-dark special-font">&#8377; Grand Total : {{grandTotal}}</h5>
+
+    <div class="mt-6">
+      <h4 class="special-font text-center"> Select Address &nbsp;&nbsp;&nbsp;
+        <a routerLink="/addAddress">
+          <mat-icon title="Add Address">add_circle</mat-icon>
+        </a>
+      </h4>
+    </div>
+    <hr class="special-hr">
+    <div class="row mt-3 mb-6" *ngIf="addresses && addresses.length > 0">
+      <div class="col col-8 col-md col-md-4 mt-2 ml-auto mr-auto" *ngFor="let address of addresses" id="addresses">
+        <div class="card box-shadows pointer" [ngClass]="{'selected': selectedAddress == address._id}"  (click)="selectAddress(address._id)">
+          <div class="card-body">
+            <h5 class="card-title text-center font-weight-bold special-font">{{address.name}}</h5>
+            <hr class="special-hr">
+            <h6 class="text-center text-dark">{{address.contact}}</h6>
+            <p class="text-center text-dark font-weight-bold font-italic">{{address.address}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="mt-3 mb-3 text-center" *ngIf="addresses && addresses.length == 0">
+      <h5 class="text-center text-info special-font">No Addresses Available Yet</h5>
+    </div>
+    <div class="mt-6">
+      <h4 class="special-font text-center">Select Card &nbsp;&nbsp;&nbsp;
+        <a routerLink="/addCard">
+          <mat-icon title="Add Card">add_circle</mat-icon>
+        </a>
+      </h4>
+    </div>
+    <hr class="special-hr">
+    <div class="row mt-3 mb-6" *ngIf="cards && cards.length > 0">
+      <div class="col col-8 col-md col-md-4 mt-2  ml-auto mr-auto" *ngFor="let card of cards" id="cards">
+        <div class="card box-shadows pointer" [ngClass]="{'selected': selectedCard == card._id}" (click)="selectCard(card._id)">
+          <div class="card-body">
+            <h5 class="card-title text-center font-weight-bold special-font">{{card.cardType | titlecase}}</h5>
+            <hr class="special-hr">
+            <h6 class="text-center text-dark">{{card.cardNumber}}</h6>
+            <h6 class="text-center text-dark">{{card.expiry}}</h6>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="col-6 ml-auto mr-auto text-center">
+      <button class="btn btn-outline-dark special-font" [disabled]="checkoutForm.invalid" (click)="placeOrder()">Place Order</button>
+    </div>
+    <div class="mt-3 mb-3 text-center" *ngIf="cards && cards.length == 0">
+      <h5 class="text-center text-info special-font">No Addresses Available Yet, Add One</h5>
+    </div>
+  </div>
+
+<div class="mt-3 mb-3" *ngIf="products && products.length == 0">
+  <h5 class="text-center text-info special-font">No Products Available Yet, Add One</h5>
+</div>
+
+</div>

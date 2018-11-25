@@ -37,6 +37,9 @@
 
     <hr class="special-hr">
     <h5 class="text-center text-dark special-font">&#8377; {{total}} (Delivery Carges will apply on checkout)</h5>
+    <div class="col text-center">
+      <button class="btn btn-outline-dark special-font btn-sm font-weight-bold" (click)="checkout()">Checkout</button>
+    </div>
   </div>
 
   <div class="mt-3 mb-3" *ngIf="products && products.length == 0">

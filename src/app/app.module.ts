@@ -33,7 +33,10 @@ import { AddressService } from './services/address.service';
 import { CartService } from './services/cart.service';
 import { WishlistService } from './services/wishlist.service';
 import { WishlistComponent } from './wishlist/wishlist.component';
-
+import { CheckoutComponent } from './checkout/checkout.component';
+import { CheckoutService } from './services/checkout.service';
+import { OrderComponent } from './order/order.component';
+import { OrderService } from './services/order.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -53,7 +56,9 @@ import { WishlistComponent } from './wishlist/wishlist.component';
     EditCardComponent,
     EditAddressComponent,
     ProfileComponent,
-    WishlistComponent
+    WishlistComponent,
+    CheckoutComponent,
+    OrderComponent
   ],
   imports: [
     BrowserModule,
@@ -74,12 +79,14 @@ import { WishlistComponent } from './wishlist/wishlist.component';
     AddressService,
     ProfileService,
     CartService,
-    WishlistService
+    WishlistService,
+    CheckoutService,
+    OrderService
   ],
   entryComponents: [
     MessageSentDialogComponent,
     SearchResultDialogComponent,
-    AlertComponent
+    AlertComponent,
   ],
   bootstrap: [AppComponent]
 })
