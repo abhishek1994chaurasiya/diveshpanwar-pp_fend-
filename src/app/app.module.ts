@@ -40,6 +40,7 @@ import { OrderService } from './services/order.service';
 import { NotificationService } from './services/notification.service';
 import { NotificationComponent } from './notification/notification.component';
 import { DataDialogComponent } from './data-dialog/data-dialog.component';
+import { FeedbackService } from './services/feedback.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -87,7 +88,8 @@ import { DataDialogComponent } from './data-dialog/data-dialog.component';
     WishlistService,
     CheckoutService,
     OrderService,
-    NotificationService
+    NotificationService,
+    FeedbackService
   ],
   entryComponents: [
     MessageSentDialogComponent,

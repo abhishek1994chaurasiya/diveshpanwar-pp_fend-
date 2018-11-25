@@ -1,5 +1,5 @@
-<div>
-  <div class="col-6 ml-auto mr-auto mt-1 mb-6" *ngIf="product">
+<div class="mb-6">
+  <div class="col-6 ml-auto mr-auto mt-1" *ngIf="product">
     <div class="card box-shadows">
       <img class="card-img-top image-styling img-fluid mx-auto d-block img-thumbnail pl-2 pr-2" src="{{product.imgUrl}}"
         alt="{{product.displayName}}" style="margin-top: 3%">
@@ -26,13 +26,13 @@
           </div>
         </div>
         <div class="row" *ngIf="product.extra">
-            <div class="col text-right">
-              <h6 class="font-italic"><strong>Todays Offer:</strong></h6>
-            </div>
-            <div class="col text-left">
-              <h6 class="font-italic"> Extra &#8377; {{product.offerPrice}} off</h6>
-            </div>
+          <div class="col text-right">
+            <h6 class="font-italic"><strong>Todays Offer:</strong></h6>
           </div>
+          <div class="col text-left">
+            <h6 class="font-italic"> Extra &#8377; {{product.offerPrice}} off</h6>
+          </div>
+        </div>
 
         <div class="row">
           <div class="col text-right">
@@ -79,9 +79,54 @@
           <button class="btn btn-outline-info text-dark special-font font-weight-bold col-6" (click)="addToWishList()">Add
             To Wishlist</button>
         </div>
-
       </div>
-
     </div>
   </div>
+  <div class="col-6 ml-auto mr-auto mt-6"  *ngIf="userLoggedIn && userBroughtProduct > 0">
+    <h5 class="text-center text-info special-font">Give Feedback</h5>
+    <div class="card box-shadows">
+      <div class="card-body">
+        <h5 class="card-title text-center font-weight-bold special-font">We value your feedback</h5>
+        <hr class="special-hr">
+        <div class="text-center">
+          <h4>
+            <span *ngFor="let rate of rater" (click)="changeRating(rate)" class="pointer" [ngClass]="{'text-yellow': rating >= rate, 'text-dark' : rating < rate}">
+              &#9733;
+            </span>
+            <form [formGroup]="feedbackForm" (ngSubmit)="submitFeedback()">
+              <mat-form-field appearance="outline" class="inp-control text-center special-font">
+                <mat-label>Feedback</mat-label>
+                <mat-icon matPrefix>comment</mat-icon>
+                <textarea matInput placeholder="Feedback" formControlName="message" autocomplete="off"></textarea>
+                <mat-hint>Enter feedback</mat-hint>
+                <mat-error *ngIf="feedbackForm.controls.message.hasError('required')">
+                  Feedback is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+              <div class="form-group mt-3">
+                <input type="submit" value="Submit" class="btn btn-sm btn-outline-info special-font" [disabled]="!feedbackForm.valid">
+              </div>
+            </form>
+          </h4>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-6 ml-auto mr-auto mt-6" *ngIf="feedbacks && feedbacks.length > 0">
+      <h4 class="text-center font-weight-bold special-font mt-3 mb-3">Feedbacks</h4>
+      <hr class="special-hr">
+    <mat-expansion-panel *ngFor="let feedback of feedbacks" class="mt-2 mb-2">
+      <mat-expansion-panel-header>
+        <mat-panel-title class="special-font font-weight-bold">
+          {{feedback.username}}
+        </mat-panel-title>
+        <mat-panel-description class="text-right" style="display: inline-block">
+          <strong>Rating: </strong>{{feedback.rating}}/5
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <p>{{feedback.message}}</p>
+    </mat-expansion-panel>
+  </div>
 </div>
+
+<h5 class="mt-3 mb-6 special-font text-center text-info" *ngIf="feedbacks && feedbacks.length == 0">No feedbacks available for this product.</h5>

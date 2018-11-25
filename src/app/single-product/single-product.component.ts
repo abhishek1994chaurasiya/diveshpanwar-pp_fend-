@@ -1,11 +1,12 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ProductService } from '../services/product.service';
 import { ActivatedRoute } from '@angular/router';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material';
 import { AlertComponent } from '../alert/alert.component';
 import { CartService } from '../services/cart.service';
 import { WishlistService } from '../services/wishlist.service';
+import { FeedbackService } from '../services/feedback.service';
 
 @Component({
   selector: 'app-single-product',
@@ -19,7 +20,15 @@ export class SingleProductComponent implements OnInit {
   maxQty = [];
   userId = null;
   userLoggedIn = null;
+  rater = [1, 2, 3, 4, 5];
+  rating = 1;
+  feedbackForm: FormGroup;
   wishListForm: FormGroup;
+  productId = null;
+  feedbacks: any[];
+  username = null;
+  userBroughtProduct = 0;
+
   constructor(
     private productService: ProductService,
     private cdRef: ChangeDetectorRef,
@@ -27,11 +36,13 @@ export class SingleProductComponent implements OnInit {
     private formBuilder: FormBuilder,
     public dialog: MatDialog,
     private cartService: CartService,
-    private wishlistService: WishlistService
+    private wishlistService: WishlistService,
+    private feedbackService: FeedbackService
   ) {}
 
   ngOnInit() {
     this.userId = window.sessionStorage.getItem('user_id');
+    this.username = window.sessionStorage.getItem('username');
     const status = window.sessionStorage.getItem('loggedIn');
     if (status === 'true') {
       this.userLoggedIn = true;
@@ -66,9 +77,19 @@ export class SingleProductComponent implements OnInit {
       maxQty: null
     });
 
+    this.feedbackForm = this.formBuilder.group({
+      userId: [null, Validators.required, null],
+      rating: [null, Validators.required, null],
+      message: [null, Validators.required, null],
+      productId: [null, Validators.required, null],
+      username: [null, Validators.required, null],
+      date: [new Date(), Validators.required, null]
+    });
+
     this.error = false;
     this.route.params.subscribe(param => {
       productId = param.productId;
+      this.productId = productId;
       this.cartForm.patchValue({
         productId: productId
       });
@@ -90,6 +111,13 @@ export class SingleProductComponent implements OnInit {
             this.wishListForm.patchValue({
               userId: this.userId
             });
+
+            this.feedbackForm.patchValue({
+              productId: this.productId,
+              userId: this.userId,
+              rating: 1,
+              username: this.username
+            });
           }
           for (let i = 0; i < this.product.maxQty; i++) {
             this.maxQty.push(String(i + 1));
@@ -103,6 +131,35 @@ export class SingleProductComponent implements OnInit {
           this.cdRef.detectChanges();
         }
       );
+      this.feedbackService.getFeedbacks(this.productId).subscribe(
+        res => {
+          this.feedbacks = res.json();
+          console.log(this.feedbacks);
+        },
+        err => {
+          console.log(err.json());
+          const dialogRef = this.dialog.open(AlertComponent, {
+            width: '90%',
+            data: {
+              type: err.json() ? 'info' : 'danger',
+              message: err.json() ? err.json().message : `Something went wrong`
+            }
+          });
+
+          dialogRef.afterClosed().subscribe(result => {
+            console.log('The dialog was closed');
+          });
+        }
+      );
+      this.userBroughtProduct = 0;
+      this.feedbackService
+        .userBroughtProduct(this.productId, this.userId)
+        .subscribe(res => {
+          console.log(res.json());
+          this.userBroughtProduct = res.json().count;
+        }, err => {
+          console.log(err.json());
+        });
     });
   }
 
@@ -170,6 +227,7 @@ export class SingleProductComponent implements OnInit {
       this.cartService.addOneProduct(productToAdd).subscribe(
         res => {
           console.log(res);
+          this.cdRef.detectChanges();
         },
         err => {
           console.log(err);
@@ -201,6 +259,47 @@ export class SingleProductComponent implements OnInit {
           data: {
             type: err.json() ? 'info' : 'danger',
             message: err.json() ? err.json().message : `Something went wrong`
+          }
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+          console.log('The dialog was closed');
+        });
+      }
+    );
+  }
+
+  changeRating(rate) {
+    this.rating = rate;
+    this.feedbackForm.patchValue({
+      rating: this.rating
+    });
+  }
+
+  submitFeedback() {
+    this.feedbackService.giveFeedback(this.feedbackForm.value).subscribe(
+      res => {
+        console.log(res.json());
+        const dialogRef = this.dialog.open(AlertComponent, {
+          width: '50%',
+          data: {
+            type: 'success',
+            message: `Feedback recorded successfully.`
+          }
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+          console.log('The dialog was closed');
+          this.ngOnInit();
+        });
+      },
+      err => {
+        console.log(err);
+        const dialogRef = this.dialog.open(AlertComponent, {
+          width: '50%',
+          data: {
+            type: 'danger',
+            message: `Something went wrong. Please try again`
           }
         });
 

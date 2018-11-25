@@ -43,6 +43,7 @@ export class LoginComponent implements OnInit {
           console.log(res);
           this.userId = res.id;
           window.sessionStorage.setItem('user_id', res.id);
+          window.sessionStorage.setItem('username', res.username);
           window.sessionStorage.setItem('loggedIn', 'true');
           console.log(this.userId);
           if (window.localStorage.cart) {
