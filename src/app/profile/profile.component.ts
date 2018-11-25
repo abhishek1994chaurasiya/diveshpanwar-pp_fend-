@@ -24,6 +24,7 @@ export class ProfileComponent implements OnInit {
   profileData: any;
   addresses = [];
   cards = [];
+  recommendations = [];
   signupForm: FormGroup;
   invalidPassword = false;
   editProfileData = false;
@@ -43,6 +44,7 @@ export class ProfileComponent implements OnInit {
     this.profileData = null;
     this.addresses = [];
     this.cards = [];
+    this.recommendations = [];
     this.userId = window.sessionStorage.getItem('user_id');
     console.log(this.userId);
     this.signupForm = this.formBuilder.group(
@@ -133,6 +135,29 @@ export class ProfileComponent implements OnInit {
           });
         }
       );
+
+      this.profileService.fetchRecommendations(this.userId).subscribe(
+        res => {
+          console.log(res.json());
+          const dataArray = res.json();
+          let newData = [];
+          let addedIds = [];
+          if (dataArray.length > 0) {
+            dataArray.forEach(element => {
+              if (addedIds.indexOf(element.productId) == -1) {
+                addedIds.push(element.productId);
+                newData.push(element);
+              }
+            });
+            this.recommendations = newData;
+          } else {
+            this.recommendations = [];
+          }
+        }, err => {
+          console.log(err.json());
+        }
+      );
+
     }
   }
 
@@ -152,6 +177,10 @@ export class ProfileComponent implements OnInit {
 
   editCard(cardId) {
     this.router.navigate(['/editCard', cardId]);
+  }
+
+  showProduct(productId) {
+    this.router.navigate(['/product', productId]);
   }
 
   deleteAddress(addressId) {

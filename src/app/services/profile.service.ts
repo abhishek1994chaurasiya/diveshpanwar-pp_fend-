@@ -19,4 +19,8 @@ export class ProfileService {
   fetchCards(userId) {
     return this.http.post('http://localhost:3000/getCards', {userId: userId});
   }
+
+  fetchRecommendations(userId) {
+    return this.http.post('http://localhost:3000/getRecommendations', {userId: userId});
+  }
 }
