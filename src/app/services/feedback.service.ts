@@ -19,4 +19,8 @@ export class FeedbackService {
   userBroughtProduct(productId, userId) {
     return this.http.post('http://localhost:3000/userBroughtProduct', {productId: productId, userId: userId});
   }
+
+  userGivenFeedback(productId, userId) {
+    return this.http.post('http://localhost:3000/userGivenFeedback', {productId: productId, userId: userId});
+  }
 }

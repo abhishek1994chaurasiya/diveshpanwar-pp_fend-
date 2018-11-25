@@ -15,7 +15,7 @@
         <tr *ngFor="let product of products">
           <td class="special-font">{{product.displayName}}</td>
           <td><del class="text-danger"> &#8377; {{product.price}}</del> &#8377;{{product.offerPrice}}</td>
-          <td>{{product.discount}}% <span *ngIf="product.extra">Extra &#8377; {{product.extra}} off</span></td>
+          <td>{{product.discount}}% <span *ngIf="product.extra"> (Extra &#8377; {{product.extra}} off)</span></td>
           <td class="text-center">
             <div class="form-row">
               <div class="col">

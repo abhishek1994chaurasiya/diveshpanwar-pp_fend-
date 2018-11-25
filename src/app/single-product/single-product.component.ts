@@ -28,7 +28,7 @@ export class SingleProductComponent implements OnInit {
   feedbacks: any[];
   username = null;
   userBroughtProduct = 0;
-
+  userGivenfeedback = 0;
   constructor(
     private productService: ProductService,
     private cdRef: ChangeDetectorRef,
@@ -154,12 +154,28 @@ export class SingleProductComponent implements OnInit {
       this.userBroughtProduct = 0;
       this.feedbackService
         .userBroughtProduct(this.productId, this.userId)
-        .subscribe(res => {
-          console.log(res.json());
-          this.userBroughtProduct = res.json().count;
-        }, err => {
-          console.log(err.json());
-        });
+        .subscribe(
+          res => {
+            console.log(res.json());
+            this.userBroughtProduct = res.json().count;
+          },
+          err => {
+            console.log(err.json());
+          }
+        );
+
+      this.userGivenfeedback = 0;
+      this.feedbackService
+        .userGivenFeedback(this.productId, this.userId)
+        .subscribe(
+          res => {
+            console.log(res.json());
+            this.userGivenfeedback = res.json().count;
+          },
+          err => {
+            console.log(err.json());
+          }
+        );
     });
   }
 
