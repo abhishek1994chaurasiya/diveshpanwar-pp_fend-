@@ -82,7 +82,7 @@ export class LoginComponent implements OnInit {
             }
           } else {
             window.localStorage.removeItem('cart');
-            this.router.navigate(['/cart']);
+            this.router.navigate(['/profile']);
           }
         },
         err => {
