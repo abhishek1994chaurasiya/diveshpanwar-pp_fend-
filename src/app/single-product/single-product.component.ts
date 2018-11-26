@@ -254,7 +254,7 @@ export class SingleProductComponent implements OnInit {
       }
       window.localStorage.cart = JSON.stringify(productArray);
       this.snackBar.open('Product added to the cart', 'Close', {
-        duration: 200
+        duration: 500
       });
       // const dialogRef = this.dialog.open(AlertComponent, {
       //   width: '50%',

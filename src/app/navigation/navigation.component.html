@@ -16,10 +16,9 @@
 
     <button mat-button (click)="logout()" class="bigger-fonts special-font" *ngIf="userLoggedIn">Logout</button>
     <button mat-button routerLink="/notifications" class="bigger-fonts special-font" *ngIf="userLoggedIn">
-      <mat-icon *ngIf="notificationCount == 0">notifications_none</mat-icon>
-      <mat-icon *ngIf="notificationCount > 0">notifications_active
+      <mat-icon>notifications_active
       </mat-icon>
-      <span class="badge badge-pill badge-light" *ngIf="notificationCount > 0">{{notificationCount}}</span>
+      <span class="badge badge-pill badge-light">{{notificationCount}}</span>
     </button>
     <button mat-button class="bigger-fonts special-font" routerLink="/cart">
       <i class="material-icons">
@@ -41,10 +40,9 @@
   <button mat-menu-item routerLink="/orders" *ngIf="userLoggedIn">Orders</button>
   <button mat-menu-item (click)="logout()" *ngIf="userLoggedIn">Logout</button>
   <button mat-menu-item routerLink="/notifications" *ngIf="userLoggedIn">
-    <mat-icon *ngIf="notificationCount == 0">notifications_none</mat-icon>
-    <mat-icon *ngIf="notificationCount > 0">notifications_active
+    <mat-icon>notifications_active
     </mat-icon>
-    <span class="badge badge-pill badge-dark" *ngIf="notificationCount > 0">{{notificationCount}}</span>
+    <span class="badge badge-pill badge-dark">{{notificationCount}}</span>
   </button>
   <button mat-menu-item routerLink="/cart">
     <i class="material-icons">

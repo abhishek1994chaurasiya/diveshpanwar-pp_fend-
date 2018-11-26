@@ -26,6 +26,7 @@ export class NavigationComponent implements OnInit {
   userId = null;
   requestSent = false;
   notificationCount = 0;
+  notificationRequestSent = false;
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
@@ -53,8 +54,18 @@ export class NavigationComponent implements OnInit {
     }
     if (window.localStorage.notifications) {
       const notifications = JSON.parse(window.localStorage.notifications);
-
       this.notificationCount = notifications.length;
+      // console.log(this.notificationCount);
+    } else if (this.userLoggedIn && !this.notificationRequestSent) {
+      this.notificationService.getUnreadNotifications(this.userId).subscribe(
+        notifications => {
+          window.localStorage.notifications = JSON.stringify(notifications.json());
+          this.notificationRequestSent = true;
+        }, err => {
+          console.log(err);
+          this.notificationRequestSent = false;
+        }
+      );
     }
     if (window.localStorage.cart) {
       let cart = JSON.parse(window.localStorage.cart);
@@ -71,13 +82,6 @@ export class NavigationComponent implements OnInit {
         err => {
           console.log(err);
           this.requestSent = false;
-        }
-      );
-      this.notificationService.getUnreadNotifications(this.userId).subscribe(
-        notifications => {
-          window.localStorage.notifications = JSON.stringify(notifications.json());
-        }, err => {
-          console.log(err);
         }
       );
     } else {
