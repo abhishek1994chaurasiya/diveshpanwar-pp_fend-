@@ -1,0 +1,19 @@
+<h4 class="text-center special-font mt-3">
+  Select Product Category
+</h4>
+<hr class="special-hr">
+<mat-list *ngIf="data.categories && data.categories.length > 0">
+  <div>
+    <mat-list-item class="special-font pointer" (click)="openLink('all')">All</mat-list-item>
+    <mat-divider></mat-divider>
+  </div>
+
+  <div *ngFor="let category of data.categories">
+    <mat-list-item class="special-font pointer" (click)="openLink(category.name)">{{category.name | titlecase}}</mat-list-item>
+    <mat-divider></mat-divider>
+  </div>
+</mat-list>
+
+<div class="text-center" *ngIf="!data.categories">
+  <h6 class="text-center special-font">No categries Available</h6>
+</div>

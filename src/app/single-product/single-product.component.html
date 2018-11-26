@@ -68,7 +68,7 @@
               Quantity:
             </div>
             <div class="col text-left">
-              <select name="productQuantity" id="productQuantity" formControlName="productQuantity" class="form-control col-7 col-md-3"
+              <select name="productQuantity" id="productQuantity" formControlName="productQuantity" class="form-control col-8 col-md-5"
                 style="height: 2rem; font-size: 0.8rem;" *ngIf="maxQty">
                 <option *ngFor="let counter of maxQty" value={{counter}}>{{counter}}</option>
               </select>
@@ -86,7 +86,7 @@
       </div>
     </div>
   </div>
-  <div class="col-6 ml-auto mr-auto mt-6" *ngIf="userLoggedIn && userBroughtProduct > 0 && userGivenfeedback == 0">
+  <div class="col-6 ml-auto mr-auto mt-6" *ngIf="product && userLoggedIn && userBroughtProduct > 0 && userGivenfeedback == 0">
     <h5 class="text-center text-info special-font">Give Feedback</h5>
     <div class="card box-shadows">
       <div class="card-body">
@@ -116,7 +116,7 @@
       </div>
     </div>
   </div>
-  <div class="col-6 ml-auto mr-auto mt-6" *ngIf="feedbacks && feedbacks.length > 0">
+  <div class="col-6 ml-auto mr-auto mt-6" *ngIf="product && feedbacks && feedbacks.length > 0">
     <h4 class="text-center font-weight-bold special-font mt-3 mb-3">Feedbacks</h4>
     <hr class="special-hr">
     <mat-expansion-panel *ngFor="let feedback of feedbacks" class="mt-2 mb-2">
@@ -136,5 +136,8 @@
   </div>
 </div>
 
-<h5 class="mt-3 mb-6 special-font text-center text-info" *ngIf="feedbacks && feedbacks.length == 0">No feedbacks
+<h5 class="mt-3 mb-6 special-font text-center text-info" *ngIf="product && feedbacks && feedbacks.length == 0">No
+  feedbacks
   available for this product.</h5>
+
+  <h5 class="mt-3 mb-6 special-font text-center text-info" *ngIf="!product">No Product Available.</h5>

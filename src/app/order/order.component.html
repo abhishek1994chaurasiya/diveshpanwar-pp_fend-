@@ -12,6 +12,7 @@
             <option value=''>All</option>
             <option value='open'>Open</option>
             <option value='cancelled'>Cancelled</option>
+            <option value='delivered'>Delivered</option>
             <option value='closed'>Closed</option>
             <option value='returned'>Returned</option>
             <option value='dispatched'>Dispatched</option>
@@ -53,8 +54,13 @@
               <button class="btn btn-outline-dark special-font btn-sm font-weight-bold" (click)="changeOrderStatus(order)">Cancel</button>
             </div>
             <div class="text-center" *ngIf="order.orderStatus  == 'delivered'">
-              <button class="btn btn-outline-danger special-font btn-sm font-weight-bold" (click)="changeOrderStatus(order)">Return</button>
-            </div>
+              <div class="text-center" *ngIf="order.canBeReturned">
+                <button class="btn btn-outline-danger special-font btn-sm font-weight-bold" (click)="changeOrderStatus(order)">Return</button>
+              </div>
+              <div class="text-center" *ngIf="!order.canBeReturned">
+                  <h6 class="text-center text-dark special-font">{{order.orderStatus}}</h6>
+                </div>
+              </div>
             <div class="text-center" *ngIf="order.orderStatus  !== 'open' && order.orderStatus  !== 'delivered' ">
               <h6 class="text-center text-dark special-font">{{order.orderStatus}}</h6>
             </div>

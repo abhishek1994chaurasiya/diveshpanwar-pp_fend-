@@ -4,6 +4,7 @@ import { AddressService } from '../services/address.service';
 import { MatDialog } from '@angular/material';
 import { AlertComponent } from '../alert/alert.component';
 import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-add-address',
@@ -21,7 +22,8 @@ export class AddAddressComponent implements OnInit {
     private addressService: AddressService,
     private cdRef: ChangeDetectorRef,
     public dialog: MatDialog,
-    private router: Router
+    private router: Router,
+    private location: Location
 
   ) {}
 
@@ -60,7 +62,8 @@ export class AddAddressComponent implements OnInit {
 
         dialogRef.afterClosed().subscribe(result => {
           console.log('The dialog was closed');
-          this.router.navigate(['/profile']);
+          // this.router.navigate(['/profile']);
+          this.location.back();
         });
 
       }, err => {

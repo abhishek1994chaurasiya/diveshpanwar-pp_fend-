@@ -16,6 +16,7 @@ export class OrderComponent implements OnInit {
   userId = null;
   order = null;
   filterForm: FormGroup;
+  dateToday = new Date();
   constructor(
     private orderService: OrderService,
     private cdRef: ChangeDetectorRef,

@@ -9,6 +9,7 @@ import {MatDatepicker} from '@angular/material/datepicker';
 import * as _moment from 'moment';
 import {Moment} from 'moment';
 import { CardService } from '../services/card.service';
+import { Location } from '@angular/common';
 
 const moment = _moment;
 
@@ -51,7 +52,8 @@ export class AddCardComponent implements OnInit {
     private cardService: CardService,
     private cdRef: ChangeDetectorRef,
     public dialog: MatDialog,
-    private router: Router
+    private router: Router,
+    private location: Location
 
   ) {}
 
@@ -106,7 +108,8 @@ export class AddCardComponent implements OnInit {
 
         dialogRef.afterClosed().subscribe(result => {
           console.log('The dialog was closed');
-          this.router.navigate(['/profile']);
+          // this.router.navigate(['/profile']);
+          this.location.back();
         });
 
       }, err => {

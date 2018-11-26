@@ -2,7 +2,7 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ProductService } from '../services/product.service';
 import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatSnackBar } from '@angular/material';
 import { AlertComponent } from '../alert/alert.component';
 import { CartService } from '../services/cart.service';
 import { WishlistService } from '../services/wishlist.service';
@@ -40,7 +40,8 @@ export class SingleProductComponent implements OnInit {
     public dialog: MatDialog,
     private cartService: CartService,
     private wishlistService: WishlistService,
-    private feedbackService: FeedbackService
+    private feedbackService: FeedbackService,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit() {
@@ -133,6 +134,18 @@ export class SingleProductComponent implements OnInit {
         err => {
           console.log(err);
           this.error = true;
+          const dialogRef = this.dialog.open(AlertComponent, {
+            width: '90%',
+            data: {
+              type: err.json() ? 'info' : 'danger',
+              message: err.json() ? err.json().message : `Something went wrong`
+            }
+          });
+
+          dialogRef.afterClosed().subscribe(result => {
+            console.log('The dialog was closed');
+          });
+
           this.cdRef.detectChanges();
         }
       );
@@ -240,6 +253,9 @@ export class SingleProductComponent implements OnInit {
         productToAdd = this.cartForm.value;
       }
       window.localStorage.cart = JSON.stringify(productArray);
+      this.snackBar.open('Product added to the cart', 'Close', {
+        duration: 200
+      });
       // const dialogRef = this.dialog.open(AlertComponent, {
       //   width: '50%',
       //   data: {
@@ -262,6 +278,9 @@ export class SingleProductComponent implements OnInit {
         res => {
           console.log(res);
           this.cdRef.detectChanges();
+          // this.snackBar.open('Product added to the cart', 'Close', {
+          //   duration: 500
+          // });
         },
         err => {
           console.log(err);

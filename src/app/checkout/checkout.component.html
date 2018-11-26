@@ -74,12 +74,12 @@
     <hr class="special-hr">
     <div class="row mt-3 mb-6" *ngIf="cards && cards.length > 0">
       <div class="col col-8 col-md col-md-4 mt-2  ml-auto mr-auto" *ngFor="let card of cards" id="cards">
-        <div class="card box-shadows pointer" [ngClass]="{'selected': selectedCard == card._id}" (click)="selectCard(card._id)">
+        <div class="card box-shadows pointer" [ngClass]="{'selected': selectedCard == card._id}" (click)="selectCard(card)">
           <div class="card-body">
             <h5 class="card-title text-center font-weight-bold special-font">{{card.cardType | titlecase}}</h5>
             <hr class="special-hr">
             <h6 class="text-center text-dark">{{card.cardNumber}}</h6>
-            <h6 class="text-center text-dark">{{card.expiry}}</h6>
+            <h6 class="text-center text-dark">{{card.expiry | date : 'MMM - yyyy'}}</h6>
             <div class="form-group form-row">
                 <div class="col text-right">
                   <mat-icon class="text-warning pointer" (click)="editCard(card._id)">edit</mat-icon>

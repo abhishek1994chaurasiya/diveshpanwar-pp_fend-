@@ -11,6 +11,10 @@ export class ProductService {
     return this.http.get('http://localhost:3000/products');
   }
 
+  allCategories() {
+    return this.http.get('http://localhost:3000/categories');
+  };
+
   allDeals() {
     return this.http.get('http://localhost:3000/deals');
   }
@@ -21,5 +25,9 @@ export class ProductService {
 
   searchProduct(searchData) {
     return this.http.post('http://localhost:3000/searchProduct', searchData);
+  }
+
+  getProductCategory(category) {
+    return this.http.post('http://localhost:3000/getProductCategory', {category: category});
   }
 }

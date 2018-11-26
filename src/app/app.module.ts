@@ -8,7 +8,7 @@ import { NavigationComponent, SearchResultDialogComponent } from './navigation/n
 import { MatModule } from './shared/mat/mat.module';
 import { CustomRoutingModule } from './shared/custom-routing/custom-routing.module';
 import { RouterModule } from '@angular/router';
-import { HomeComponent } from './home/home.component';
+import { HomeComponent, ProductCategoryComponent } from './home/home.component';
 import { ErrorComponent } from './error/error.component';
 import { SignupComponent, MessageSentDialogComponent } from './signup/signup.component';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -64,7 +64,8 @@ import { FeedbackService } from './services/feedback.service';
     CheckoutComponent,
     OrderComponent,
     NotificationComponent,
-    DataDialogComponent
+    DataDialogComponent,
+    ProductCategoryComponent
   ],
   imports: [
     BrowserModule,
@@ -95,7 +96,8 @@ import { FeedbackService } from './services/feedback.service';
     MessageSentDialogComponent,
     SearchResultDialogComponent,
     AlertComponent,
-    DataDialogComponent
+    DataDialogComponent,
+    ProductCategoryComponent
   ],
   bootstrap: [AppComponent]
 })

@@ -139,11 +139,31 @@ export class CheckoutComponent implements OnInit {
     }
   }
 
-  selectCard(cardId) {
-    this.selectedCard = cardId;
-    this.checkoutForm.patchValue({
-      cardId: this.selectedCard
-    });
+  selectCard(card) {
+    const dateArray = card.expiry.split('-');
+    const monthToday = new Date().getMonth() + 1;
+    const yearToday = new Date().getFullYear();
+    if (yearToday > Number(dateArray[0]) || monthToday > Number(dateArray[1])) {
+      this.checkoutForm.patchValue({
+        cardId: null
+      });
+      const dialogRef = this.dialog.open(AlertComponent, {
+        width: '50%',
+        data: {
+          type: 'danger',
+          message: `Selected Card has expired. Choose another card.`
+        }
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed');
+      });
+    } else {
+      this.selectedCard = card._id;
+      this.checkoutForm.patchValue({
+        cardId: this.selectedCard
+      });
+    }
   }
 
   selectAddress(addressId) {

@@ -6,8 +6,9 @@
           <a [routerLink]="['/product', product._id]" routerLinkActive="router-link-active"  (click)="onNoClick()">
               <div class="card box-shadows">
                   <img class="card-img-top image-styling mt-1 img-fluid mx-auto d-block" src="{{product.imgUrl}}" alt="{{product.displayName}}">
-                  <div class="card-body">
+                  <div class="card-body text-center">
                     <h5 class="card-title text-center font-weight-bold special-font">{{product.displayName}}</h5>
+                    <small class="text-info special-font" *ngIf="product.extra">Extra {{product.extra}} off today</small>
                   </div>
                 </div>
           </a>
