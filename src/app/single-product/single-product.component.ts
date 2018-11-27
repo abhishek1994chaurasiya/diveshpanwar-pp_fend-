@@ -333,7 +333,6 @@ export class SingleProductComponent implements OnInit {
   submitFeedback() {
     this.feedbackService.giveFeedback(this.feedbackForm.value).subscribe(
       res => {
-        ;
         const dialogRef = this.dialog.open(AlertComponent, {
           width: '50%',
           data: {

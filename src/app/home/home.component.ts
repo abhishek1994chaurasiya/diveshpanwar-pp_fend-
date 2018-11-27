@@ -144,7 +144,7 @@ export class HomeComponent implements OnInit {
               }
             });
 
-            dialogRef.afterClosed().subscribe(result => {
+            dialogRef.afterClosed().subscribe(response => {
               console.log('The dialog was closed');
             });
           }

@@ -69,7 +69,6 @@ export class ProfileComponent implements OnInit {
     if (this.userId) {
       this.profileService.fetchProfileData(this.userId).subscribe(
         res => {
-          ;
           this.profileData = res.json();
           this.signupForm.patchValue(this.profileData);
           this.signupForm.patchValue({
@@ -94,7 +93,6 @@ export class ProfileComponent implements OnInit {
       );
       this.profileService.fetchAddresses(this.userId).subscribe(
         res => {
-          ;
           this.addresses = res.json();
           this.cdRef.detectChanges();
         },
@@ -115,7 +113,6 @@ export class ProfileComponent implements OnInit {
       );
       this.profileService.fetchCards(this.userId).subscribe(
         res => {
-          ;
           this.cards = res.json();
           this.cdRef.detectChanges();
         },
@@ -138,7 +135,6 @@ export class ProfileComponent implements OnInit {
 
       this.profileService.fetchRecommendations(this.userId).subscribe(
         res => {
-          ;
           const dataArray = res.json();
           let newData = [];
           let addedIds = [];
@@ -187,7 +183,6 @@ export class ProfileComponent implements OnInit {
   deleteAddress(addressId) {
     this.addressService.deleteAddress(addressId).subscribe(
       res => {
-        ;
         const dialogRef = this.dialog.open(AlertComponent, {
           width: '50%',
           data: {
@@ -235,7 +230,6 @@ export class ProfileComponent implements OnInit {
   deleteCard(cardId) {
     this.cardService.deleteCard(cardId).subscribe(
       res => {
-        ;
         const dialogRef = this.dialog.open(AlertComponent, {
           width: '50%',
           data: {

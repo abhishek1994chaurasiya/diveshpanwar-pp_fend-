@@ -23,7 +23,6 @@ export class NotificationComponent implements OnInit {
     this.userId = window.sessionStorage.getItem('user_id');
     this.notificationService.getNotifications(this.userId).subscribe(
       res => {
-        ;
         this.notifications = res.json();
       },
       err => {
@@ -92,7 +91,6 @@ export class NotificationComponent implements OnInit {
       notification.status = 'read';
       this.notificationService.updateNotification(notification).subscribe(
         res => {
-          ;
           const dialogRef = this.dialog.open(AlertComponent, {
             width: '50%',
             data: {

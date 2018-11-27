@@ -89,7 +89,6 @@ export class EditCardComponent implements OnInit {
 
     this.cardService.fetchCard(this.cardId).subscribe(
       res => {
-        ;
         this.cardData = res.json();
         this.cardForm.patchValue(this.cardData);
         let expiryDate = this.cardData.expiry.split('-');
@@ -150,7 +149,6 @@ export class EditCardComponent implements OnInit {
 
     this.cardService.editCard(this.cardForm.value).subscribe(
       res => {
-        ;
         const dialogRef = this.dialog.open(AlertComponent, {
           width: '50%',
           data: {

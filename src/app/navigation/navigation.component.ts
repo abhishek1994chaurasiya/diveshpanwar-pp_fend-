@@ -75,7 +75,6 @@ export class NavigationComponent implements OnInit {
       this.userId = window.sessionStorage.getItem('user_id');
       this.cartService.getCartItems(this.userId).subscribe(
         res => {
-          ;
           this.requestSent = true;
           window.localStorage.cart = JSON.stringify(res.json());
         },
@@ -106,7 +105,6 @@ export class NavigationComponent implements OnInit {
     if (this.searchForm.get('searchCriteria').value) {
       this.productService.searchProduct(this.searchForm.value).subscribe(
         res => {
-          ;
           this.products = res.json();
           this.dialogRef = this.dialog.open(SearchResultDialogComponent, {
             width: '90%',

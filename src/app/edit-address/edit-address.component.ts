@@ -52,7 +52,6 @@ export class EditAddressComponent implements OnInit {
     });
     this.addressService.fetchAddress(this.addressId).subscribe(
       res => {
-        ;
         this.addressData = res.json();
         this.addressForm.patchValue(this.addressData);
         this.cdRef.detectChanges();
@@ -79,7 +78,6 @@ export class EditAddressComponent implements OnInit {
     this.error = null;
     this.addressService.editAddress(this.addressForm.value).subscribe(
       res => {
-        ;
         const dialogRef = this.dialog.open(AlertComponent, {
           width: '50%',
           data: {

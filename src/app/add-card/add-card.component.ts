@@ -97,7 +97,6 @@ export class AddCardComponent implements OnInit {
 
     this.cardService.addCard(this.cardForm.value).subscribe(
       res => {
-        ;
         const dialogRef = this.dialog.open(AlertComponent, {
           width: '50%',
           data: {
