@@ -31,10 +31,9 @@ export class CartComponent implements OnInit {
     } else {
       this.userLoggedIn = false;
     }
-
+    if (this.userLoggedIn) {
       this.cartService.getCartItems(this.userId).subscribe(
         res => {
-          ;
           this.products = res.json();
           if (this.products) {
             this.products.forEach(element => {
@@ -58,44 +57,64 @@ export class CartComponent implements OnInit {
           dialogRef.afterClosed().subscribe(result => {
             console.log('The dialog was closed');
           });
-          }
+        }
       );
-
-  }
-
-  removeCartItem(cartId) {
-    this.cartService.removeCartItem(cartId).subscribe(
-      res => {
-        ;
-        const dialogRef = this.dialog.open(AlertComponent, {
-          width: '50%',
-          data: {
-            type: 'success',
-            message: `Product Successfully removed`
-          }
-        });
-
-        dialogRef.afterClosed().subscribe(result => {
-          console.log('The dialog was closed');
-          this.ngOnInit();
-        });
-      },
-      err => {
-        console.log(err);
-        const dialogRef = this.dialog.open(AlertComponent, {
-          width: '50%',
-          data: {
-            type: 'danger',
-            message: `Something went wrong. Please try again`
-          }
-        });
-
-        dialogRef.afterClosed().subscribe(result => {
-          console.log('The dialog was closed');
+    } else {
+      this.products = JSON.parse(window.localStorage.cart);
+      if (this.products) {
+        this.products.forEach(element => {
+          let qty = Number(element.productQuantity);
+          let price = Number(element.offerPrice);
+          let extra = element.extra ? Number(element.extra) : 0;
+          this.total = this.total + (qty * price - extra);
         });
       }
+    }
+  }
 
-    );
+  removeCartItem(cartItem) {
+    if (this.userLoggedIn) {
+      this.cartService.removeCartItem(cartItem._id).subscribe(
+        res => {
+          const dialogRef = this.dialog.open(AlertComponent, {
+            width: '50%',
+            data: {
+              type: 'success',
+              message: `Product Successfully removed`
+            }
+          });
+
+          dialogRef.afterClosed().subscribe(result => {
+            console.log('The dialog was closed');
+            this.ngOnInit();
+          });
+        },
+        err => {
+          console.log(err);
+          const dialogRef = this.dialog.open(AlertComponent, {
+            width: '50%',
+            data: {
+              type: 'danger',
+              message: `Something went wrong. Please try again`
+            }
+          });
+
+          dialogRef.afterClosed().subscribe(result => {
+            console.log('The dialog was closed');
+          });
+        }
+      );
+    } else {
+      let cart = JSON.parse(window.localStorage.cart);
+      let cartArray = [];
+      cart.forEach(element => {
+        if (element.productId !== cartItem.productId) {
+          cartArray.push(element);
+        }
+      });
+      window.localStorage.cart = JSON.stringify(cartArray);
+      this.ngOnInit();
+    }
   }
 
   increaseQuantity(product) {
@@ -111,15 +130,19 @@ export class CartComponent implements OnInit {
       cartArray.push(element);
     });
     window.localStorage.cart = JSON.stringify(cartArray);
-
-    this.cartService.toggleQuantity(productToAdd).subscribe(
-      res => {
-        ;
-        this.ngOnInit();
-      }, err => {
-        console.log(err.json());
-      }
-    );
+    if (!this.userLoggedIn) {
+      this.ngOnInit();
+    }
+    if (this.userLoggedIn) {
+      this.cartService.toggleQuantity(productToAdd).subscribe(
+        res => {
+          this.ngOnInit();
+        },
+        err => {
+          console.log(err.json());
+        }
+      );
+    }
     this.cdRef.detectChanges();
   }
 
@@ -137,14 +160,19 @@ export class CartComponent implements OnInit {
     });
 
     window.localStorage.cart = JSON.stringify(cartArray);
-    this.cartService.toggleQuantity(productToAdd).subscribe(
-      res => {
-        ;
-        this.ngOnInit();
-      }, err => {
-        console.log(err.json());
-      }
-    );
+    if (!this.userLoggedIn) {
+      this.ngOnInit();
+    }
+    if (this.userLoggedIn) {
+      this.cartService.toggleQuantity(productToAdd).subscribe(
+        res => {
+          this.ngOnInit();
+        },
+        err => {
+          console.log(err.json());
+        }
+      );
+    }
     this.cdRef.detectChanges();
   }
 

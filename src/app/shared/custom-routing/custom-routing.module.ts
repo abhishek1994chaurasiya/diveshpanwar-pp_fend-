@@ -24,7 +24,7 @@ const appRoutes: Routes = [
   { path: 'profile', component: ProfileComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'cart', component: CartComponent, canActivate: [AuthGuard] },
+  { path: 'cart', component: CartComponent },
   { path: 'product/:productId', component: SingleProductComponent },
   { path: 'addAddress', component: AddAddressComponent, canActivate: [AuthGuard]  },
   { path: 'addCard', component: AddCardComponent, canActivate: [AuthGuard]  },
