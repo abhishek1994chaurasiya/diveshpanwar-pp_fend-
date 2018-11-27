@@ -66,6 +66,8 @@ export class NavigationComponent implements OnInit {
           this.notificationRequestSent = false;
         }
       );
+    } else {
+      this.notificationCount = 0;
     }
     if (window.localStorage.cart) {
       let cart = JSON.parse(window.localStorage.cart);
@@ -85,7 +87,7 @@ export class NavigationComponent implements OnInit {
       );
     } else {
       this.cartCount = 0;
-      this.notificationCount = 0;
+      // this.notificationCount = 0;
     }
     this.cdRef.detectChanges();
   }
