@@ -2,17 +2,17 @@
 @import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
 
 .special-font {
-  font-family: 'Kaushan Script', cursive;
+  font-family: "Kaushan Script", cursive;
 }
 
 .box-shadows {
-  -webkit-box-shadow: 4px 6px 5px -2px rgba(0,0,0,0.75);
-  -moz-box-shadow: 4px 6px 5px -2px rgba(0,0,0,0.75);
-  box-shadow: 4px 6px 5px -2px rgba(0,0,0,0.75);
+  -webkit-box-shadow: 4px 6px 5px -2px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 4px 6px 5px -2px rgba(0, 0, 0, 0.75);
+  box-shadow: 4px 6px 5px -2px rgba(0, 0, 0, 0.75);
 }
 
 .special-hr {
-  background-image: linear-gradient(-135deg,#a951ed 0,#02ccba 100%);
+  background-image: linear-gradient(-135deg, #a951ed 0, #02ccba 100%);
   margin: 10px auto;
   min-height: 1px;
   width: 90%;
@@ -27,4 +27,12 @@
 
 .pointer {
   cursor: pointer;
+}
+
+.loading-image {
+  height: 200px;
+  width: 200px;
+  position: absolute;
+  top: 40%;
+  left: 43%;
 }

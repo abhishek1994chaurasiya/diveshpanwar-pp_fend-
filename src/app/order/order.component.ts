@@ -71,7 +71,7 @@ export class OrderComponent implements OnInit {
     }
     this.orderService.updateOrder(order).subscribe(
       res => {
-        console.log(res.json());
+        ;
         const dialogRef = this.dialog.open(AlertComponent, {
           width: '50%',
           data: {
@@ -147,7 +147,7 @@ export class OrderComponent implements OnInit {
     } else {
       this.orderService.filterOrder(this.filterForm.value).subscribe(
         res => {
-          console.log(res.json());
+          ;
           this.orders = res.json();
         },
         err => {

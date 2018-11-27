@@ -74,7 +74,7 @@ export class LoginComponent implements OnInit {
             if (cartArray.length > 0) {
               this.cartService.addBulkCart(cartArray).subscribe(
                 res => {
-                  console.log(res.json());
+                  ;
                   const dialogRef = this.dialog.open(AlertComponent, {
                     width: '80%',
                     data: {

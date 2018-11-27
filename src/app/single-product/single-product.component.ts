@@ -32,6 +32,7 @@ export class SingleProductComponent implements OnInit {
   userGivenfeedback = 0;
   userRating = 0;
   reviewCount = 0;
+  contentLoaded = false;
   constructor(
     private productService: ProductService,
     private cdRef: ChangeDetectorRef,
@@ -128,7 +129,7 @@ export class SingleProductComponent implements OnInit {
           for (let i = 0; i < this.product.maxQty; i++) {
             this.maxQty.push(String(i + 1));
           }
-
+          this.contentLoaded = true;
           this.cdRef.detectChanges();
         },
         err => {
@@ -152,7 +153,7 @@ export class SingleProductComponent implements OnInit {
       this.feedbackService.getFeedbacks(this.productId).subscribe(
         res => {
           this.feedbacks = res.json();
-          console.log(this.feedbacks);
+          // console.log(this.feedbacks);
           let count = this.feedbacks.length;
           this.userRating = 0;
           this.reviewCount = count;
@@ -187,7 +188,7 @@ export class SingleProductComponent implements OnInit {
         .userBroughtProduct(this.productId, this.userId)
         .subscribe(
           res => {
-            console.log(res.json());
+            // ;
             this.userBroughtProduct = res.json().count;
           },
           err => {
@@ -200,7 +201,7 @@ export class SingleProductComponent implements OnInit {
         .userGivenFeedback(this.productId, this.userId)
         .subscribe(
           res => {
-            console.log(res.json());
+            // ;
             this.userGivenfeedback = res.json().count;
           },
           err => {
@@ -332,7 +333,7 @@ export class SingleProductComponent implements OnInit {
   submitFeedback() {
     this.feedbackService.giveFeedback(this.feedbackForm.value).subscribe(
       res => {
-        console.log(res.json());
+        ;
         const dialogRef = this.dialog.open(AlertComponent, {
           width: '50%',
           data: {

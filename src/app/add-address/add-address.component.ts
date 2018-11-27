@@ -51,7 +51,7 @@ export class AddAddressComponent implements OnInit {
     this.error = null;
     this.addressService.addAddress(this.addressForm.value).subscribe(
       res => {
-        console.log(res.json());
+        ;
         const dialogRef = this.dialog.open(AlertComponent, {
           width: '50%',
           data: {

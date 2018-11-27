@@ -31,7 +31,7 @@ export class WishlistComponent implements OnInit {
     }
     this.wishlistService.getWishlist(this.userId).subscribe(
       res => {
-        console.log(res.json());
+        ;
         this.wishlistData = res.json();
       },
       err => {
@@ -98,7 +98,7 @@ export class WishlistComponent implements OnInit {
   removeFromWishList(wishlistId) {
     this.wishlistService.removeFromWishList(wishlistId).subscribe(
       res => {
-        console.log(res.json());
+        ;
         const dialogRef = this.dialog.open(AlertComponent, {
           width: '50%',
           data: {

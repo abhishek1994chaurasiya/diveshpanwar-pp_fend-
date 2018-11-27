@@ -25,6 +25,8 @@ export class HomeComponent implements OnInit {
   error: any;
   category = null;
   categories: any;
+  dealsLoaded = false;
+  productsLoaded = false;
   constructor(
     private productService: ProductService,
     private router: Router,
@@ -37,8 +39,9 @@ export class HomeComponent implements OnInit {
     this.error = null;
     this.productService.allProducts().subscribe(
       res => {
-        console.log(res.json());
+        // ;
         this.products = res.json();
+        this.productsLoaded = true;
         this.cdref.detectChanges();
       },
       err => {
@@ -61,7 +64,7 @@ export class HomeComponent implements OnInit {
 
     this.productService.allCategories().subscribe(
       res => {
-        console.log(res.json());
+        // ;
         this.categories = res.json();
         this.cdref.detectChanges();
       },
@@ -84,8 +87,9 @@ export class HomeComponent implements OnInit {
     );
     this.productService.allDeals().subscribe(
       res => {
-        console.log(res.json());
+        // ;
         this.deals = res.json();
+        this.dealsLoaded = true;
         this.cdref.detectChanges();
       },
       err => {
@@ -120,6 +124,7 @@ export class HomeComponent implements OnInit {
 
     cateorySheet.afterDismissed().subscribe(result => {
       this.category = result;
+      this.productsLoaded = false;
       if (this.category === 'all') {
         this.ngOnInit();
       } else if (this.category) {
@@ -128,6 +133,7 @@ export class HomeComponent implements OnInit {
         this.productService.getProductCategory(this.category).subscribe(
           res => {
             this.products = res.json();
+            this.productsLoaded = true;
           },
           err => {
             const dialogRef = this.dialog.open(AlertComponent, {

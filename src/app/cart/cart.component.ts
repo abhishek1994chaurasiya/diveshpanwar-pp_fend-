@@ -34,7 +34,7 @@ export class CartComponent implements OnInit {
 
       this.cartService.getCartItems(this.userId).subscribe(
         res => {
-          console.log(res.json());
+          ;
           this.products = res.json();
           if (this.products) {
             this.products.forEach(element => {
@@ -66,7 +66,7 @@ export class CartComponent implements OnInit {
   removeCartItem(cartId) {
     this.cartService.removeCartItem(cartId).subscribe(
       res => {
-        console.log(res.json());
+        ;
         const dialogRef = this.dialog.open(AlertComponent, {
           width: '50%',
           data: {
@@ -114,7 +114,7 @@ export class CartComponent implements OnInit {
 
     this.cartService.toggleQuantity(productToAdd).subscribe(
       res => {
-        console.log(res.json());
+        ;
         this.ngOnInit();
       }, err => {
         console.log(err.json());
@@ -139,7 +139,7 @@ export class CartComponent implements OnInit {
     window.localStorage.cart = JSON.stringify(cartArray);
     this.cartService.toggleQuantity(productToAdd).subscribe(
       res => {
-        console.log(res.json());
+        ;
         this.ngOnInit();
       }, err => {
         console.log(err.json());

@@ -65,7 +65,7 @@ export class CheckoutComponent implements OnInit {
 
     this.cartService.getCartItems(this.userId).subscribe(
       res => {
-        console.log(res.json());
+        ;
         this.products = res.json();
         if (this.products) {
           this.products.forEach(element => {
@@ -95,7 +95,7 @@ export class CheckoutComponent implements OnInit {
     if (this.userId) {
       this.profileService.fetchAddresses(this.userId).subscribe(
         res => {
-          console.log(res.json());
+          ;
           this.addresses = res.json();
           this.cdRef.detectChanges();
         },
@@ -116,7 +116,7 @@ export class CheckoutComponent implements OnInit {
       );
       this.profileService.fetchCards(this.userId).subscribe(
         res => {
-          console.log(res.json());
+          ;
           this.cards = res.json();
           this.cdRef.detectChanges();
         },
@@ -177,7 +177,7 @@ export class CheckoutComponent implements OnInit {
     console.log(this.checkoutForm.value);
     this.checkoutService.placeOrder(this.checkoutForm.value).subscribe(
       res => {
-        console.log(res.json());
+        ;
         const dialogRef = this.dialog.open(AlertComponent, {
           width: '50%',
           data: {
@@ -232,7 +232,7 @@ export class CheckoutComponent implements OnInit {
   deleteAddress(addressId) {
     this.addressService.deleteAddress(addressId).subscribe(
       res => {
-        console.log(res.json());
+        ;
         const dialogRef = this.dialog.open(AlertComponent, {
           width: '50%',
           data: {
@@ -269,7 +269,7 @@ export class CheckoutComponent implements OnInit {
   deleteCard(cardId) {
     this.cardService.deleteCard(cardId).subscribe(
       res => {
-        console.log(res.json());
+        ;
         const dialogRef = this.dialog.open(AlertComponent, {
           width: '50%',
           data: {
