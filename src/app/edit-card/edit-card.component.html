@@ -29,6 +29,7 @@
                 <mat-icon matPrefix>credit_card</mat-icon>
                 <input matInput [type]='"number"' placeholder="Card Number" formControlName="cardNumber" autocomplete="off">
                 <mat-hint>Enter a valid contact number (0-9)</mat-hint>
+                <mat-hint align="end">{{cardForm.get('cardNumber').value.length}} / 16</mat-hint>
                 <mat-error *ngIf="cardForm.controls.cardNumber.hasError('pattern') && !cardForm.controls.cardNumber.hasError('required')">
                   Please enter a valid card number.
                 </mat-error>
