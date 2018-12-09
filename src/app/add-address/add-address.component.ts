@@ -16,7 +16,7 @@ export class AddAddressComponent implements OnInit {
   validatePassword: any;
   userId = null;
   error = null;
-
+  mailSent = false;
   constructor(
     private formBuilder: FormBuilder,
     private addressService: AddressService,

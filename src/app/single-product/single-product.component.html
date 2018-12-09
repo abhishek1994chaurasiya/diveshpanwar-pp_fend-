@@ -1,9 +1,9 @@
-<div class="text-center" *ngIf="!contentLoaded">
-  <img src="/assets/images/loading.gif" class="rounded mx-auto d-block loading-image" alt="loading..." />
+<div class="container-fluid text-center mt-3" *ngIf="!contentLoaded">
+  <img src="/assets/images/loading.gif" class="rounded ml-auto mr-auto d-block loading-image" alt="loading..." />
 </div>
 
 <div class="mb-6" *ngIf="contentLoaded">
-  <div class="col-6 ml-auto mr-auto mt-1" *ngIf="product">
+  <div class="col-10 col-md-6 ml-auto mr-auto mt-1" *ngIf="product">
     <div class="card box-shadows">
       <img
         class="card-img-top image-styling img-fluid mx-auto d-block img-thumbnail pl-2 pr-2"
@@ -184,7 +184,7 @@
     </div>
   </div>
   <div
-    class="col-6 ml-auto mr-auto mt-6"
+    class="col-10 col-md-6 ml-auto mr-auto mt-6"
     *ngIf="product && feedbacks && feedbacks.length > 0"
   >
     <h4 class="text-center font-weight-bold special-font mt-3 mb-3">

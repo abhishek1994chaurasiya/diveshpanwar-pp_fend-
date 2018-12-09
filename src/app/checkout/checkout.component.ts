@@ -138,9 +138,15 @@ export class CheckoutComponent implements OnInit {
 
   selectCard(card) {
     const dateArray = card.expiry.split('-');
+    console.log(dateArray);
+
     const monthToday = new Date().getMonth() + 1;
     const yearToday = new Date().getFullYear();
-    if (yearToday > Number(dateArray[0]) || monthToday > Number(dateArray[1])) {
+    if (
+      (Number(yearToday) > Number(dateArray[0])) ||
+      (Number(yearToday) === Number(dateArray[0]) &&
+        Number(monthToday) > Number(dateArray[1]))
+    ) {
       this.checkoutForm.patchValue({
         cardId: null
       });

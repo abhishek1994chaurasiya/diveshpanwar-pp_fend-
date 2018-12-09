@@ -54,7 +54,7 @@ export class EditCardComponent implements OnInit {
 
   cardData: any;
   cardId = null;
-
+  mailSent = false;
   constructor(
     private formBuilder: FormBuilder,
     private cardService: CardService,

@@ -13,7 +13,7 @@ export class ProductService {
 
   allCategories() {
     return this.http.get('https://diveshpanwar-heroku1.herokuapp.com/categories');
-  };
+  }
 
   allDeals() {
     return this.http.get('https://diveshpanwar-heroku1.herokuapp.com/deals');

@@ -17,6 +17,8 @@ export class EditAddressComponent implements OnInit {
   error = null;
   addressId: null;
   addressData: any;
+  mailSent = false;
+
   constructor(
     private formBuilder: FormBuilder,
     private addressService: AddressService,

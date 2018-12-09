@@ -46,6 +46,8 @@ export class AddCardComponent implements OnInit {
     {value: 'forex', viewValue: 'Forex'}
   ];
 
+  mailSent = false;
+
 
   constructor(
     private formBuilder: FormBuilder,
