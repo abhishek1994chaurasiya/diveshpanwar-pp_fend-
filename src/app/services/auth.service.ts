@@ -9,14 +9,14 @@ export class AuthService {
   constructor(private http: HttpClient) { }
 
   signup(signUpdata): any {
-      return this.http.post('http://localhost:3000/signup', signUpdata);
+      return this.http.post('https://diveshpanwar-heroku1.herokuapp.com/signup', signUpdata);
   }
 
   editProfile(signUpdata): any {
-    return this.http.post('http://localhost:3000/editProfile', signUpdata);
+    return this.http.post('https://diveshpanwar-heroku1.herokuapp.com/editProfile', signUpdata);
 }
 
   login(loginData): any {
-    return this.http.post('http://localhost:3000/login', loginData);
+    return this.http.post('https://diveshpanwar-heroku1.herokuapp.com/login', loginData);
   }
 }

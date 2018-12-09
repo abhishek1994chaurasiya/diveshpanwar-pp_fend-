@@ -8,26 +8,26 @@ export class ProductService {
   constructor(private http: Http) {}
 
   allProducts() {
-    return this.http.get('http://localhost:3000/products');
+    return this.http.get('https://diveshpanwar-heroku1.herokuapp.com/products');
   }
 
   allCategories() {
-    return this.http.get('http://localhost:3000/categories');
+    return this.http.get('https://diveshpanwar-heroku1.herokuapp.com/categories');
   };
 
   allDeals() {
-    return this.http.get('http://localhost:3000/deals');
+    return this.http.get('https://diveshpanwar-heroku1.herokuapp.com/deals');
   }
 
   singleProduct(productId) {
-    return this.http.post('http://localhost:3000/singleProduct', {productId: productId});
+    return this.http.post('https://diveshpanwar-heroku1.herokuapp.com/singleProduct', {productId: productId});
   }
 
   searchProduct(searchData) {
-    return this.http.post('http://localhost:3000/searchProduct', searchData);
+    return this.http.post('https://diveshpanwar-heroku1.herokuapp.com/searchProduct', searchData);
   }
 
   getProductCategory(category) {
-    return this.http.post('http://localhost:3000/getProductCategory', {category: category});
+    return this.http.post('https://diveshpanwar-heroku1.herokuapp.com/getProductCategory', {category: category});
   }
 }

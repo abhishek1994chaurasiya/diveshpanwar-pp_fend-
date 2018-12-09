@@ -10,20 +10,20 @@ export class CardService {
 
   addCard(formData) {
     console.log(formData);
-    return this.http.post('http://localhost:3000/addCard', formData);
+    return this.http.post('https://diveshpanwar-heroku1.herokuapp.com/addCard', formData);
   }
 
   fetchCard(cardId) {
-    return this.http.post('http://localhost:3000/fetchCard', {cardId: cardId});
+    return this.http.post('https://diveshpanwar-heroku1.herokuapp.com/fetchCard', {cardId: cardId});
   }
 
   editCard(formData) {
     // console.log(formData);
-    return this.http.post('http://localhost:3000/editCard', formData);
+    return this.http.post('https://diveshpanwar-heroku1.herokuapp.com/editCard', formData);
   }
 
   deleteCard(cardId) {
-    return this.http.post('http://localhost:3000/deleteCard', {cardId: cardId});
+    return this.http.post('https://diveshpanwar-heroku1.herokuapp.com/deleteCard', {cardId: cardId});
   }
 
 

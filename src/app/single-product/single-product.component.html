@@ -41,7 +41,7 @@
           </div>
           <div class="col text-left">
             <h6 class="font-italic">
-              Extra &#8377; {{ product.offerPrice }} off
+              Extra &#8377; {{ product.extra }} off
             </h6>
           </div>
         </div>
@@ -58,7 +58,7 @@
           <div class="col text-right">
             <h6 class="font-italic text-info"><strong>Ratings:</strong></h6>
           </div>
-          <div class="col text-left">
+          <div class="col text-left" title={{userRating}}>
             <h6>
               <span
                 *ngFor="let rate of rater"

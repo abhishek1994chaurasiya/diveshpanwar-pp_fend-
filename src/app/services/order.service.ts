@@ -8,17 +8,17 @@ export class OrderService {
   constructor(private http: Http) {}
 
   getOrders(userId) {
-    return this.http.post('http://localhost:3000/getOrders', {
+    return this.http.post('https://diveshpanwar-heroku1.herokuapp.com/getOrders', {
       userId: userId
     });
   }
 
   filterOrder(filterData) {
-    return this.http.post('http://localhost:3000/filterOrder', filterData);
+    return this.http.post('https://diveshpanwar-heroku1.herokuapp.com/filterOrder', filterData);
   }
 
   updateOrder(order) {
     console.log(order);
-    return this.http.post('http://localhost:3000/updateOrder', order);
+    return this.http.post('https://diveshpanwar-heroku1.herokuapp.com/updateOrder', order);
   }
 }

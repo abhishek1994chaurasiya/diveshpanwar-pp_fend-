@@ -10,19 +10,19 @@ export class AddressService {
 
   addAddress(formData) {
     // console.log(formData);
-    return this.http.post('http://localhost:3000/addAddress', formData);
+    return this.http.post('https://diveshpanwar-heroku1.herokuapp.com/addAddress', formData);
   }
 
   fetchAddress(addressId) {
-    return this.http.post('http://localhost:3000/fetchAddress', {addressId: addressId});
+    return this.http.post('https://diveshpanwar-heroku1.herokuapp.com/fetchAddress', {addressId: addressId});
   }
 
   editAddress(formData) {
     // console.log(formData);
-    return this.http.post('http://localhost:3000/editAddress', formData);
+    return this.http.post('https://diveshpanwar-heroku1.herokuapp.com/editAddress', formData);
   }
 
   deleteAddress(addressId) {
-    return this.http.post('http://localhost:3000/deleteAddress', {addressId: addressId});
+    return this.http.post('https://diveshpanwar-heroku1.herokuapp.com/deleteAddress', {addressId: addressId});
   }
 }

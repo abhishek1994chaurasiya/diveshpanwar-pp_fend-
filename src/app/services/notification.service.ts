@@ -9,18 +9,18 @@ export class NotificationService {
   constructor(private http: Http) { }
 
   getNotifications(userId) {
-    return this.http.post('http://localhost:3000/getNotifications', {userId: userId});
+    return this.http.post('https://diveshpanwar-heroku1.herokuapp.com/getNotifications', {userId: userId});
   }
 
   updateNotification(notification) {
-    return this.http.post('http://localhost:3000/updateNotification', notification);
+    return this.http.post('https://diveshpanwar-heroku1.herokuapp.com/updateNotification', notification);
   }
 
   getOrderDetail(orderId) {
-    return this.http.post('http://localhost:3000/getOrderDetail', {orderId: orderId});
+    return this.http.post('https://diveshpanwar-heroku1.herokuapp.com/getOrderDetail', {orderId: orderId});
   }
 
   getUnreadNotifications(userId) {
-    return this.http.post('http://localhost:3000/getUnreadNotifications', {userId: userId});
+    return this.http.post('https://diveshpanwar-heroku1.herokuapp.com/getUnreadNotifications', {userId: userId});
   }
 }

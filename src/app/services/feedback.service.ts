@@ -9,18 +9,18 @@ export class FeedbackService {
   constructor(private http: Http) { }
 
   giveFeedback(feedbackData) {
-    return this.http.post('http://localhost:3000/giveFeedback', feedbackData);
+    return this.http.post('https://diveshpanwar-heroku1.herokuapp.com/giveFeedback', feedbackData);
   }
 
   getFeedbacks(productId) {
-    return this.http.post('http://localhost:3000/getFeedbacks', {productId: productId});
+    return this.http.post('https://diveshpanwar-heroku1.herokuapp.com/getFeedbacks', {productId: productId});
   }
 
   userBroughtProduct(productId, userId) {
-    return this.http.post('http://localhost:3000/userBroughtProduct', {productId: productId, userId: userId});
+    return this.http.post('https://diveshpanwar-heroku1.herokuapp.com/userBroughtProduct', {productId: productId, userId: userId});
   }
 
   userGivenFeedback(productId, userId) {
-    return this.http.post('http://localhost:3000/userGivenFeedback', {productId: productId, userId: userId});
+    return this.http.post('https://diveshpanwar-heroku1.herokuapp.com/userGivenFeedback', {productId: productId, userId: userId});
   }
 }

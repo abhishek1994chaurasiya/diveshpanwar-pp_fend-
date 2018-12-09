@@ -9,6 +9,6 @@ export class CheckoutService {
   constructor(private http: Http) { }
 
   placeOrder(checkoutForm) {
-    return this.http.post('http://localhost:3000/placeOrder', checkoutForm);
+    return this.http.post('https://diveshpanwar-heroku1.herokuapp.com/placeOrder', checkoutForm);
   }
 }
