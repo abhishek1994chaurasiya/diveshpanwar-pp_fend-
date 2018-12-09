@@ -125,7 +125,7 @@ export class HomeComponent implements OnInit {
     cateorySheet.afterDismissed().subscribe(result => {
       this.category = result;
       this.productsLoaded = false;
-      if (this.category === 'all') {
+      if (this.category === 'all' || !this.category) {
         this.ngOnInit();
       } else if (this.category) {
         console.log(this.category);
